@@ -17,8 +17,19 @@ import org.json.simple.parser.ParseException;
  */
 public class lolAuth {
 
+    /**
+     * Attempts to login a player against the lolnet database
+     * !! WARNING, CURRENTLY BROKEN! !!
+     * 
+     * @version 1.0 17/05/2014 - First Added
+     * @param playerName
+     * @param password
+     * @return true if login was successful
+     * @throws IOException
+     * @throws ParseException 
+     */
     public static boolean login(String playerName, String password) throws IOException, ParseException {
-        PhpHandler p = new PhpHandler();
+        /*PhpbbHandler p = new PhpbbHandler();
 
         String player = playerName.toLowerCase();
         String passwordHash = p.phpbb_hash(password);
@@ -30,7 +41,7 @@ public class lolAuth {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/login.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(5000);
+        conn.setConnectTimeout(10000);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -40,7 +51,8 @@ public class lolAuth {
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         wr.close();
         rd.close();
-        return "true".equals(json.get("loggedin").toString());
+        return "true".equals(json.get("loggedin").toString());*/
+        return false;
     }
 
 }
