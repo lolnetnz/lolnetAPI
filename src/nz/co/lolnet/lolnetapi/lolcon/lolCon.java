@@ -166,6 +166,33 @@ public class lolCon {
         return success;
     }
     
+    public static boolean removeUserFromForumGroup(String authHash, String playerName, int groupID) throws MalformedURLException, IOException, UnsupportedEncodingException, ParseException {
+        boolean success = false;
+        int playerForumID = getForumUserID(authHash, playerName);
+        if (userAlreadyBelongsToGroup(authHash, playerForumID, groupID)) {
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("groupid", "UTF-8") + "=" + URLEncoder.encode(groupID + "", "UTF-8");
+            data += "&" + URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(playerForumID + "", "UTF-8");
+            
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removeuserfromforumgroup.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+            success = (boolean) json.get("success");
+            
+            wr.close();
+            rd.close();
+        }
+        
+        return success;
+    }
+    
     private static boolean userAlreadyBelongsToGroup(String authHash, int playerID, int groupID) throws MalformedURLException, IOException, UnsupportedEncodingException, ParseException {
         boolean isInGroup = false;
         for (int groups : getForumUserForumGroups(authHash, playerID)) {
