@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Iterator;
+import nz.co.lolnet.lolnetAPI;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -29,7 +30,7 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettop10monthlyvotes.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(10000);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
 
         // Get the response
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -55,7 +56,7 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(5000);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -86,7 +87,7 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuserid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(5000);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -106,6 +107,39 @@ public class lolCon {
             return safeLongToInt(forumid);
         }
         throw new NoSuchObjectException("Username not found in Database!");       
+    }
+    
+    public static HashMap<String, Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        HashMap<String, Integer> output = new HashMap<>();
+        
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("userForumID", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
+        
+        // Send data
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuserforumgroups.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+        
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        
+        wr.close();
+        rd.close();
+        
+        Iterator<?> keys = json.keySet().iterator();
+        
+        while (keys.hasNext()) {
+            String group_id = (String) keys.next();
+            String group_name = (String) json.get(group_id);
+            output.put(group_name, Integer.parseInt(group_id));
+        }
+        
+        return output;
     }
 
     private static int safeLongToInt(long l) {
