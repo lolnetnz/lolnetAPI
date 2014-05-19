@@ -139,6 +139,16 @@ public class lolCon {
         
         return output;
     }
+    
+    private static boolean userAlreadyBelongsToGroup(String authHash, int playerID, int groupID) throws MalformedURLException, IOException, UnsupportedEncodingException, ParseException {
+        boolean isInGroup = false;
+        for (int groups : getForumUserForumGroups(authHash, playerID)) {
+            if (groups == groupID) {
+                isInGroup = true;
+            }
+        }
+        return isInGroup;
+    }
 
     private static int safeLongToInt(long l) {
         if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
