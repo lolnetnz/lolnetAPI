@@ -10,9 +10,11 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.rmi.NoSuchObjectException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import nz.co.lolnet.lolnetAPI;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -109,9 +111,9 @@ public class lolCon {
         throw new NoSuchObjectException("Username not found in Database!");       
     }
     
-    public static HashMap<String, Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    public static ArrayList<Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
-        HashMap<String, Integer> output = new HashMap<>();
+        ArrayList<Integer> output = new ArrayList<>();
         
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("userForumID", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
@@ -126,17 +128,13 @@ public class lolCon {
         wr.flush();
         
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        JSONArray json = (JSONArray) new JSONParser().parse(rd.readLine());
         
         wr.close();
         rd.close();
         
-        Iterator<?> keys = json.keySet().iterator();
-        
-        while (keys.hasNext()) {
-            String group_id = (String) keys.next();
-            String group_name = (String) json.get(group_id);
-            output.put(group_name, Integer.parseInt(group_id));
+        for(Object o : json) {
+            output.add(Integer.parseInt(o.toString()));
         }
         
         return output;
