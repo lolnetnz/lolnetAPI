@@ -24,6 +24,65 @@ import org.json.simple.parser.ParseException;
  * @author cptwin
  */
 public class lolCon {
+    
+    public static void registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername + "", "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/registernewplayer.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();      
+        wr.close();
+    }
+    
+    public static long getPlayerBalance(String playername) throws UnsupportedEncodingException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerbalance.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(5000);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        
+        wr.close();
+        rd.close();
+        
+        return (long) json.get("playerbalance");
+    }
+    
+    public static boolean updatePlayerBalance(String authHash, String playername, int balancechange) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername + "", "UTF-8");
+        data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(balancechange + "", "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        
+        wr.close();
+        rd.close();
+        
+        return (boolean) json.get("success");
+    }
 
     public static HashMap<String, Long> getTop10MonthlyVoters() throws IOException, ParseException {
         HashMap<String, Long> output = new HashMap<>();
