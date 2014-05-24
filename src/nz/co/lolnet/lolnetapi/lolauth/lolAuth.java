@@ -19,7 +19,6 @@ public class lolAuth {
 
     /**
      * Attempts to login a player against the lolnet database
-     * !! WARNING, CURRENTLY BROKEN! !!
      * 
      * @version 1.0 17/05/2014 - First Added
      * @param playerName
@@ -29,7 +28,7 @@ public class lolAuth {
      * @throws ParseException 
      */
     public static boolean login(String playerName, String password) throws IOException, ParseException {
-        /*PhpbbHandler p = new PhpbbHandler();
+        PhpbbHandler p = new PhpbbHandler();
 
         String player = playerName.toLowerCase();
         String passwordHash = p.phpbb_hash(password);
@@ -51,8 +50,7 @@ public class lolAuth {
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         wr.close();
         rd.close();
-        return "true".equals(json.get("loggedin").toString());*/
-        return false;
+        return "true".equals(json.get("loggedin").toString());
     }
 
 }
