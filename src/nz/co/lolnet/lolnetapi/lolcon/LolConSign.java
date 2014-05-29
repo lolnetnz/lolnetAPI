@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import nz.co.lolnet.lolnetAPI;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,7 +22,6 @@ public class LolConSign {
     
     //29/05/2014 - CptWin - Added throwing exceptions and return statement
     public static boolean logSignTransaction(String authHash,String userName, String signType, String serverName, String location, String signDetail, String Cost) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-            // Construct data
 
             String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
             data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
@@ -30,10 +30,11 @@ public class LolConSign {
             data += "&" + URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
             data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(signDetail, "UTF-8");
             data += "&" + URLEncoder.encode("cost", "UTF-8") + "=" + URLEncoder.encode(Cost, "UTF-8");
-            // Send data
+            
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/logsigntransaction.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(lolnetAPI.httpTimeOut);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
