@@ -175,7 +175,7 @@ public class lolCon {
         ArrayList<Integer> output = new ArrayList<>();
         
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
-        data += "&" + URLEncoder.encode("userForumID", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
+        data += "&" + URLEncoder.encode("userforumid", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
         
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuserforumgroups.php");
