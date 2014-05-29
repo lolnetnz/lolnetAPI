@@ -107,8 +107,13 @@ public class lolCon {
 
         return output;
     }
-
+    
+    @Deprecated
     public static HashMap<String, Integer> getForumGroups(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        return getForumGroupsNameKey(authHash);
+    }
+
+    public static HashMap<String, Integer> getForumGroupsNameKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         HashMap<String, Integer> output = new HashMap<>();
 
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
@@ -135,6 +140,38 @@ public class lolCon {
             String group_id = (String) keys.next();
             String group_name = (String) json.get(group_id);
             output.put(group_name, Integer.parseInt(group_id));
+        }
+
+        return output;
+    }
+    
+    public static HashMap<Integer, String> getForumGroupsIDKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        HashMap<Integer, String> output = new HashMap<>();
+
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+
+        // Send data
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        Iterator<?> keys = json.keySet().iterator();
+
+        while (keys.hasNext()) {
+            String group_id = (String) keys.next();
+            String group_name = (String) json.get(group_id);
+            output.put(Integer.parseInt(group_id), group_name);
         }
 
         return output;
