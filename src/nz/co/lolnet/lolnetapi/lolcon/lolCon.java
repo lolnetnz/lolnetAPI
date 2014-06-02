@@ -47,7 +47,7 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerbalance.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(5000);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
