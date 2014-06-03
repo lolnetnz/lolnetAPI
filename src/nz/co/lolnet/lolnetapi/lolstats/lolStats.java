@@ -51,13 +51,14 @@ public class lolStats {
         wr.close();
     }
 
-    public static double getPlayerElo(String playername) throws UnsupportedEncodingException, IOException, ParseException, NullPointerException {
-        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode("cptwin", "UTF-8");
+    public static double getPlayerElo(String playername, String servername) throws UnsupportedEncodingException, IOException, ParseException, NullPointerException {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+        data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
 
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/getplayerelo.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(5000);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
