@@ -18,7 +18,7 @@ public class GetPlayerEloTest {
     public void playerInDB()
     {
         try {
-            double d = lolStats.getPlayerElo("cptwin");
+            double d = lolStats.getPlayerElo("cptwin", "defaultlolnetserver");
             assertNotNull(d);
         } catch (IOException | ParseException | NullPointerException ex) {
             Logger.getLogger(GetPlayerEloTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -29,9 +29,8 @@ public class GetPlayerEloTest {
     public void playerNotInDB()
     {
         try {
-            double d2 = lolStats.getPlayerElo("cptwinz");
+            double d2 = lolStats.getPlayerElo("cptwinz", "defaultlolnetserver");
         } catch (IOException | ParseException | NullPointerException ex) {
-            Logger.getLogger(GetPlayerEloTest.class.getName()).log(Level.SEVERE, null, ex);
             assert true;
         }
     }
