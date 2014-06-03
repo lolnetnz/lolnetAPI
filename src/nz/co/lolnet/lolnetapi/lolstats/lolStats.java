@@ -70,5 +70,22 @@ public class lolStats {
 
         return (double) json.get("elo");
     }
+    
+    public static void logBlockBreak(String authHash, String playername, String servername, String materialname) throws UnsupportedEncodingException, MalformedURLException, IOException
+    {
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+        data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
+        data += "&" + URLEncoder.encode("materialname", "UTF-8") + "=" + URLEncoder.encode(materialname, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logblockbreak.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+        wr.close();
+    }
 
 }
