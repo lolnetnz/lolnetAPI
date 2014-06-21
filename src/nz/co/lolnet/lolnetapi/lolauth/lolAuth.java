@@ -1,4 +1,4 @@
-package nz.co.lolnet.lolnetapi.lolauth;
+    package nz.co.lolnet.lolnetapi.lolauth;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,6 +52,10 @@ public class lolAuth {
 
         // Get the response
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        if (rd.readLine() == null)
+        {
+            return false;
+        }
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         wr.close();
         rd.close();
