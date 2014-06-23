@@ -123,6 +123,23 @@ public class lolStats {
         wr.close();
     }
     
+    public static void logPlayerVsPlayerDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException
+    {
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+        data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
+        data += "&" + URLEncoder.encode("killedname", "UTF-8") + "=" + URLEncoder.encode(killedname, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayervsplayerdeath.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+        wr.close();
+    }
+    
     public static boolean isPlayerRegisteredElo(String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
