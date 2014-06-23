@@ -179,5 +179,25 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
+    
+    public static void registerPlayerElo(String authHash, String playername, String servername, int elorating) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        if(!isPlayerRegisteredElo(playername, servername))
+        {
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+            data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
+            data += "&" + URLEncoder.encode("elorating", "UTF-8") + "=" + URLEncoder.encode(elorating + "", "UTF-8");
+
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/registerplayerelo.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            wr.close();
+        }
+    }
 
 }
