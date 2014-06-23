@@ -122,5 +122,62 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
+    
+    public static boolean isPlayerRegisteredElo(String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+        data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/isplayerregisteredelo.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+        
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        wr.close();
+        rd.close();
+        
+        return (boolean) json.get("registered");
+    }
+    
+    public static void updatePlayerElo(String authHash, String playername, String servername, int elorating) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        if(isPlayerRegisteredElo(playername, servername))
+        {
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+            data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
+            data += "&" + URLEncoder.encode("elorating", "UTF-8") + "=" + URLEncoder.encode(elorating + "", "UTF-8");
+
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/updateplayerelo.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            wr.close();
+        }
+    }
+    
+    public static void logPlayerNumbers(String authHash, String servername, int numplayers) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
+        data += "&" + URLEncoder.encode("numplayers", "UTF-8") + "=" + URLEncoder.encode(numplayers + "", "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayernumbers.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+        wr.close();
+    }
 
 }
