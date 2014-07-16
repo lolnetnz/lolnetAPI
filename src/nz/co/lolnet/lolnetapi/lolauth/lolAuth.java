@@ -97,6 +97,50 @@ public class lolAuth {
         return (boolean) json.get("success");
     }
     
+    public static boolean isUsernameAlreadyRegistered(String playerName) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+        
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/isusernamealreadyregistered.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        
+        wr.close();
+        rd.close();
+        
+        return (boolean) json.get("registered");
+    }
+    
+    public static boolean isEmailAlreadyRegistered(String email) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
+        
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/isemailalreadyregistered.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        
+        wr.close();
+        rd.close();
+        
+        return (boolean) json.get("registered");
+    }
+    
     private static String cleanIpAddress(String ip) {
         String output = ip;
         output = output.replaceAll("/", "");
