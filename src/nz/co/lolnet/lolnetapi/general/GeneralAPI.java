@@ -17,12 +17,13 @@ import org.json.simple.parser.ParseException;
  * @author cptwin
  */
 public class GeneralAPI {
-    
+
     /**
      * Checks if the Mojang Session Servers are online.
+     *
      * @return true if the Session Servers are online
      * @throws IOException
-     * @throws ParseException 
+     * @throws ParseException
      */
     public static boolean isMojangOnline() throws IOException, ParseException {
         // Send data
@@ -33,17 +34,19 @@ public class GeneralAPI {
         // Get the response
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
-        rd.close();       
-        String status = (String) json.get("session.minecraft.net");       
+        rd.close();
+        String status = (String) json.get("session.minecraft.net");
         return status.equalsIgnoreCase("green");
     }
-    
+
     /**
      * Grabs the UUID of a Player.
+     *
      * @param playerName
-     * @return String Representation of a UUID, which you can then use UUID.fromString() on.
+     * @return String Representation of a UUID, which you can then use
+     * UUID.fromString() on.
      * @throws IOException
-     * @throws ParseException 
+     * @throws ParseException
      */
     public static String getStringUUID(String playerName) throws IOException, ParseException {
 
@@ -66,11 +69,28 @@ public class GeneralAPI {
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         wr.close();
         rd.close();
-        
-        String rawUUID = (String) json.get("id");  
-        String UUID = rawUUID.substring(0, 8) + "-" + rawUUID.substring(8, 12) + "-" + rawUUID.substring(12, 16) + "-" + rawUUID.substring(16, 20) + "-" +rawUUID.substring(20, 32);
-        
+
+        String rawUUID = (String) json.get("id");
+        String UUID = rawUUID.substring(0, 8) + "-" + rawUUID.substring(8, 12) + "-" + rawUUID.substring(12, 16) + "-" + rawUUID.substring(16, 20) + "-" + rawUUID.substring(20, 32);
+
         return UUID;
     }
-    
+
+    /**
+     * Gets your public IP Address.
+     * @return A String representation of your IP Address.
+     * @throws IOException
+     * @throws ParseException 
+     */
+    public static String getIP() throws IOException, ParseException {
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/getmyip.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String output = rd.readLine();
+        rd.close();
+        return output;
+    }
+
 }
