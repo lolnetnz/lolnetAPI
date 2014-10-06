@@ -59,6 +59,26 @@ public class lolCon {
 
         return (long) json.get("playerbalance");
     }
+    
+    public static double getPlayerVoteValueMultiplier(String playername) throws UnsupportedEncodingException, IOException, org.json.simple.parser.ParseException {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayervotevaluemultiplier.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(1000);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return Double.parseDouble(json.get("playermultiplier").toString());
+    }
 
     public static boolean updatePlayerBalance(String authHash, String playername, int balancechange) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
