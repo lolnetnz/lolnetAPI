@@ -59,7 +59,7 @@ public class lolCon {
 
         return (long) json.get("playerbalance");
     }
-    
+     
     public static double getPlayerVoteValueMultiplier(String playername) throws UnsupportedEncodingException, IOException, org.json.simple.parser.ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
 
@@ -79,13 +79,11 @@ public class lolCon {
 
         return Double.parseDouble(json.get("playermultiplier").toString());
     }
+    
+    public static long getPlayerBonusClaimBlocks(String playername) throws UnsupportedEncodingException, IOException, ParseException {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
 
-    public static boolean updatePlayerBalance(String authHash, String playername, int balancechange) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
-        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername + "", "UTF-8");
-        data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(balancechange + "", "UTF-8");
-
-        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerbonusclaimblocks.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         conn.setConnectTimeout(lolnetAPI.httpTimeOut);
@@ -99,9 +97,9 @@ public class lolCon {
         wr.close();
         rd.close();
 
-        return (boolean) json.get("success");
+        return (long) json.get("playerbonusclaimblocks");
     }
-
+    
     public static HashMap<String, Long> getTop10MonthlyVoters() throws IOException, ParseException {
         HashMap<String, Long> output = new HashMap<>();
 
