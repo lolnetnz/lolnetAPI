@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
  * @author cptwin
  */
 public class lolAuth {
-
+    
     /**
      * Attempts to login a player against the lolnet database
      * 
@@ -34,15 +34,15 @@ public class lolAuth {
      * @throws ParseException 
      */
     public static boolean login(String authHash, String playerName, String password) throws IOException, ParseException {
-        PhpbbHandler phpbbhandler = new PhpbbHandler();
 
         String player = playerName.toLowerCase();
 
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(player, "UTF-8");
+        data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
 
         // Send data
-        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/gethash.php");
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/checkpassword.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         conn.setConnectTimeout(lolnetAPI.httpTimeOut);
@@ -56,9 +56,9 @@ public class lolAuth {
         wr.close();
         rd.close();
         
-        String hash = (String) json.get("hash");
+        boolean result = (Boolean) json.get("result");
         
-        return phpbbhandler.phpbb_check_hash(password, hash);
+        return result;
     }
     
     public static boolean register(String authHash, String playerName, String email, String ip, String password) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
