@@ -61,6 +61,37 @@ public class lolAuth {
         return result;
     }
     
+    public static boolean changePassword(String authHash, String playerName, String password) throws IOException, ParseException {
+
+        String player = playerName.toLowerCase();
+
+        PhpbbHandler phpbbhandler = new PhpbbHandler();
+        String passwordHash = phpbbhandler.phpbb_hash(password);
+        password = passwordHash;
+        
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(player, "UTF-8");
+        data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
+
+        // Send data
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/changepassword.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        wr.close();
+        rd.close();
+        
+        boolean result = (Boolean) json.get("success");
+        
+        return result;
+    }
     public static boolean register(String authHash, String playerName, String email, String ip, String password) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
         PhpbbHandler phpbbhandler = new PhpbbHandler();
