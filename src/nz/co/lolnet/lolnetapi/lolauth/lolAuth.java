@@ -224,9 +224,37 @@ public class lolAuth {
         return (boolean) json.get("registered");
     }
     
-    public static boolean isUUIDAlreadyRegistered(String UUID)
+    /**
+     * Checks if the UUID is already registered to a player in the database.
+     * 
+     * @version 1.0 26/01/2015 - Initial Version
+     * @param UUID
+     * @return true if UUID is already registered
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws ParseException 
+     */
+    public static boolean isUUIDAlreadyRegistered(String UUID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
-        return true;
+        String data = URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
+        
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/isuuidalreadyregistered.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        
+        wr.close();
+        rd.close();
+        
+        return (boolean) json.get("registered");
     }
     
     private static String cleanIpAddress(String ip) {
