@@ -26,12 +26,14 @@ public class lolAuth {
      * 
      * @version 1.0 17/05/2014 - First Added
      * @version 2.0 24/05/2014 - Comparison with hash rather than checking directly against database
+     * @version 2.1 26/01/2015 - This version is now deprecated due to UUID changes
      * @param authHash
      * @param playerName
      * @param password
      * @return true if login was successful
      * @throws IOException
      * @throws ParseException 
+     * @deprecated 
      */
     public static boolean login(String authHash, String playerName, String password) throws IOException, ParseException {
 
@@ -58,9 +60,21 @@ public class lolAuth {
         
         boolean result = (Boolean) json.get("result");
         
-        return result;
+        //return result; //This method has been deprecated
+        return false;
     }
     
+    /**
+     * REQUIRES JAVADOC'ING
+     * 
+     * @param authHash
+     * @param playerName
+     * @param password
+     * @return
+     * @throws IOException
+     * @throws ParseException 
+     * @deprecated
+     */
     public static boolean changePassword(String authHash, String playerName, String password) throws IOException, ParseException {
 
         String player = playerName.toLowerCase();
@@ -92,6 +106,22 @@ public class lolAuth {
         
         return result;
     }
+    
+    /**
+     * Registers a new player to the database.
+     * 
+     * @param authHash
+     * @param playerName
+     * @param email
+     * @param ip
+     * @param password
+     * @return true If registration was successful
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws ParseException 
+     * @deprecated 
+     */
     public static boolean register(String authHash, String playerName, String email, String ip, String password) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
         PhpbbHandler phpbbhandler = new PhpbbHandler();
@@ -128,6 +158,17 @@ public class lolAuth {
         return (boolean) json.get("success");
     }
     
+    /**
+     * Checks if the username is already registered in the database.
+     * 
+     * @version 1.0 26/01/2015 - Javadoc First Added
+     * @param playerName
+     * @return true if the player already exists in the database
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws ParseException 
+     */
     public static boolean isUsernameAlreadyRegistered(String playerName) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
@@ -150,6 +191,17 @@ public class lolAuth {
         return (boolean) json.get("registered");
     }
     
+    /**
+     * Checks if the email address is already registered to an account in the database.
+     * 
+     * @version 1.0 26/01/2015 - Javadoc First Added
+     * @param email
+     * @return true If email is already registered to an account
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws ParseException 
+     */
     public static boolean isEmailAlreadyRegistered(String email) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
         String data = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");
@@ -170,6 +222,11 @@ public class lolAuth {
         rd.close();
         
         return (boolean) json.get("registered");
+    }
+    
+    public static boolean isUUIDAlreadyRegistered(String UUID)
+    {
+        return true;
     }
     
     private static String cleanIpAddress(String ip) {
