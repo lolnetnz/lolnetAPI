@@ -24,51 +24,8 @@ public class lolAuth {
     /**
      * Attempts to login a player against the lolnet database
      *
-     * @version 1.0 17/05/2014 - First Added
-     * @version 2.0 24/05/2014 - Comparison with hash rather than checking
-     * directly against database
-     * @version 2.1 26/01/2015 - This version is now deprecated due to UUID
-     * changes
-     * @param authHash
-     * @param playerName
-     * @param password
-     * @return true if login was successful
-     * @throws IOException
-     * @throws ParseException
-     * @deprecated
-     */
-    public static boolean login(String authHash, String playerName, String password) throws IOException, ParseException {
-
-        /*String player = playerName.toLowerCase();
-
-         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
-         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(player, "UTF-8");
-         data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
-
-         // Send data
-         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/checkpassword.php");
-         URLConnection conn = url.openConnection();
-         conn.setDoOutput(true);
-         conn.setConnectTimeout(lolnetAPI.httpTimeOut);
-         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-         wr.write(data);
-         wr.flush();
-
-         // Get the response
-         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
-         wr.close();
-         rd.close();
-        
-         boolean result = (Boolean) json.get("result");*/
-        //return result; //This method has been deprecated
-        return false;
-    }
-
-    /**
-     * Attempts to login a player against the lolnet database
-     *
      * @version 1.0 26/01/2015 - First Added
+     * @version 3.0 26/01/2015 - Changed to login with UUID
      * @param authHash
      * @param playerName
      * @param UUID
@@ -77,12 +34,10 @@ public class lolAuth {
      * @throws IOException
      * @throws ParseException
      */
-    public static boolean login(String authHash, String playerName, String UUID, String password) throws IOException, ParseException {
-        String player = playerName.toLowerCase();
+    public static boolean login(String authHash, String UUID, String password) throws IOException, ParseException {
         String version = "2";
 
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
-        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(player, "UTF-8");
         data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
         data += "&" + URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
         data += "&" + URLEncoder.encode("version", "UTF-8") + "=" + URLEncoder.encode(version, "UTF-8");
