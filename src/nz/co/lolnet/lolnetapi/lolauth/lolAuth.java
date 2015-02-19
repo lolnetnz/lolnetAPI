@@ -110,6 +110,7 @@ public class lolAuth {
      *
      * @param authHash
      * @param playerName
+     * @param UUID
      * @param email
      * @param ip
      * @param password
@@ -118,10 +119,9 @@ public class lolAuth {
      * @throws MalformedURLException
      * @throws IOException
      * @throws ParseException
-     * @deprecated
      */
-    public static boolean register(String authHash, String playerName, String email, String ip, String password) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        /*PhpbbHandler phpbbhandler = new PhpbbHandler();
+    public static boolean register(String authHash, String playerName, String UUID, String email, String ip, String password) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        PhpbbHandler phpbbhandler = new PhpbbHandler();
         
          //Prepare all data needed to register
          String passwordHash = phpbbhandler.phpbb_hash(password);
@@ -136,6 +136,7 @@ public class lolAuth {
          data += "&" + URLEncoder.encode("timestamp", "UTF-8") + "=" + URLEncoder.encode(timestamp + "", "UTF-8");
          data += "&" + URLEncoder.encode("player_ip", "UTF-8") + "=" + URLEncoder.encode(playerIP, "UTF-8");
          data += "&" + URLEncoder.encode("email_hash", "UTF-8") + "=" + URLEncoder.encode(emailHash + "", "UTF-8");
+         data += "&" + URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
         
          URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/register.php");
          URLConnection conn = url.openConnection();
@@ -150,10 +151,9 @@ public class lolAuth {
          JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         
          wr.close();
-         rd.close();*/
+         rd.close();
 
-        //return (boolean) json.get("success"); //This method has been deprecated
-        return false;
+        return (boolean) json.get("success");
     }
 
     /**
