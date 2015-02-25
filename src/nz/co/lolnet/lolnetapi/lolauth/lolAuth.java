@@ -27,20 +27,21 @@ public class lolAuth {
      * @version 1.0 26/01/2015 - First Added
      * @version 3.0 26/01/2015 - Changed to login with UUID
      * @param authHash
-     * @param playerName
+     * @param playername
      * @param UUID
      * @param password
      * @return true if login was successful
      * @throws IOException
      * @throws ParseException
      */
-    public static boolean login(String authHash, String UUID, String password) throws IOException, ParseException {
+    public static boolean login(String authHash, String playername, String UUID, String password) throws IOException, ParseException {
         String version = "2";
 
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
         data += "&" + URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
         data += "&" + URLEncoder.encode("version", "UTF-8") + "=" + URLEncoder.encode(version, "UTF-8");
+        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername.toLowerCase(), "UTF-8");
 
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/checkpassword.php");
