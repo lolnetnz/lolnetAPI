@@ -126,5 +126,37 @@ public class GeneralAPI {
         
         return (long) json.get("user_id");
     }
+    
+    /**
+     * Gets the players lolnet Forum ID given the Username of the player.
+     * 
+     * @param playername
+     * @return long Player Forum ID, will return 0 if no ID is found in the database.
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws ParseException 
+     */
+    public static long getPlayerForumIDFromUsername(String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+
+        // Send data
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/general/getPlayerForumIDFromUsername.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        wr.close();
+        rd.close();
+        
+        return (long) json.get("user_id");
+    }
 
 }

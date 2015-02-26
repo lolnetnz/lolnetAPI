@@ -60,4 +60,24 @@ public class GeneralAPITest {
             Logger.getLogger(GeneralAPITest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    @Test
+    public void getPlayerForumIDFromUsernamePlayerNotInDatabase()
+    {
+        try {
+            assertEquals(0, GeneralAPI.getPlayerForumIDFromUsername("thisusernamedoesntexist"));
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(GeneralAPITest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Test
+    public void getPlayerForumIDFromUsernameCptWin()
+    {
+        try {
+            assertEquals(2, GeneralAPI.getPlayerForumIDFromUsername("CptWin"));
+        } catch (IOException | ParseException ex) {
+            Logger.getLogger(GeneralAPITest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
