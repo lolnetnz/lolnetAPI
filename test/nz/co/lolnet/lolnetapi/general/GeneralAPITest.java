@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Dajne Win
+ * @author CptWin
  */
 public class GeneralAPITest {
     
