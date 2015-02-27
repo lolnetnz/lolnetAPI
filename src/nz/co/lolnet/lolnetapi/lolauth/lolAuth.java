@@ -253,6 +253,39 @@ public class lolAuth {
 
         return (boolean) json.get("registered");
     }
+    
+    /**
+     * Checks if the player on the server matches the data stored in the lolnet database.
+     * @param playername
+     * @param UUID
+     * @return true if the player data matches
+     * @throws UnsupportedEncodingException
+     * @throws MalformedURLException
+     * @throws IOException
+     * @throws ParseException 
+     */
+    public static boolean doesStoredUsernameandUUIDMatch(String playername, String UUID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
+    {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+        data += "&" + URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/isUsernameAndUUIDMatch.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        // Get the response
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return (boolean) json.get("match");
+    }
 
     /**
      * Tidies up the IP address that is output from the Minecraft server.
