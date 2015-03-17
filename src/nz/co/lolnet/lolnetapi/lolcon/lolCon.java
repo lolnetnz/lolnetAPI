@@ -100,6 +100,60 @@ public class lolCon {
         return (long) json.get("playerbonusclaimblocks");
     }
     
+    public static String getPlayerTitle(String playername) throws UnsupportedEncodingException, IOException, ParseException {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayertitle.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(lolnetAPI.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return (String) json.get("playerTitle");
+    }
+    
+    public static boolean updatetPlayerTitle(String playerName, String newTitle,String authhash) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authhash, "UTF-8");
+            data += "&" + URLEncoder.encode("newtitle", "UTF-8") + "=" + URLEncoder.encode(newTitle, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayertitle.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+            return result;
+        }
+        return result;
+    }
+    
     public static HashMap<String, Long> getTop10MonthlyVoters() throws IOException, ParseException {
         HashMap<String, Long> output = new HashMap<>();
 
