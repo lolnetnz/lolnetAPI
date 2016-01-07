@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>nz.co.lolnet</groupId>
-            <artifactId>Core</artifactId>
+            <artifactId>LolnetAPI-core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -56,7 +56,7 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>*:Core</include>
+                                    <include>*:LolnetAPI-core</include>
                                 </includes>
                             </artifactSet>
                         </configuration>
