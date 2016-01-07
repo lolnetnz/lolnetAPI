@@ -1,0 +1,5 @@
+name: lolnetAPI
+main: nz.co.lolnet.lolnetAPI
+version: ${project.version}
+authors: [CptWin, james137137]
+website: http://www.lolnet.co.nz
