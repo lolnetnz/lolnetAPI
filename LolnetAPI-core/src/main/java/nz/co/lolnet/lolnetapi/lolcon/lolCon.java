@@ -14,6 +14,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nz.co.lolnet.lolnetapi.settings.Settings;
 
 import org.json.simple.JSONArray;
@@ -26,6 +28,16 @@ import org.json.simple.parser.ParseException;
  * @author cptwin
  */
 public class lolCon {
+    
+    public static void main(String[] args) {
+        try {
+            System.out.println(nz.co.lolnet.lolnetapi.lolcon.lolCon.getPlayerBalance("james137137"));
+        } catch (IOException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public static void registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
