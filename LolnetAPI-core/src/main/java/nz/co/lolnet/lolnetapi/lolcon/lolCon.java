@@ -445,6 +445,7 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettimelastvoted.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -458,12 +459,17 @@ public class lolCon {
 
             
             for (Object o : json) {
-                return (Timestamp.valueOf(o.toString()).getTime());
+                String toString = o.toString();
+                if (toString.length() <= 5)
+                {
+                    return 0;
+                }
+                return (Timestamp.valueOf(toString).getTime());
             }
 
-        } catch (IOException | ParseException e) {
+        } catch (IOException | ParseException | IllegalArgumentException e) {
         }
-
+        
         return 0;
     }
 
@@ -482,6 +488,404 @@ public class lolCon {
             throw new IllegalArgumentException(l + " cannot be cast to int without changing its value.");
         }
         return (int) l;
+    }
+    
+    public static boolean updatetPlayerBonusClaimBlocks(String authHash, String playerName, int balanceChange) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(balanceChange), "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbonusclaimblocks.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+            return result;
+        }
+        return result;
+    }
+
+    public static boolean playerExists(String authHash, String playerName) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/playerexistsinlolcoindatabase.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+        }
+        return result;
+    }
+
+    @Deprecated
+    public static boolean updatePlayerBalance(String authHash, String playerName, int balanceChange) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(balanceChange), "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+            return result;
+        }
+        return result;
+    }
+    
+    public static boolean updatePlayerBalance(String authHash, String playerName, int balanceChange, String logInfomation) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(balanceChange), "UTF-8");
+            data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(logInfomation, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+            return result;
+        }
+        return result;
+    }
+
+    public static HashMap<String, Integer> getTopTenPlayerVotersThisMonth() {
+        HashMap<String, Integer> players = new HashMap<>();
+        return players;
+    }
+
+    public static boolean logSignTransaction(String authHash, String userName, String signType, String serverName, String location, String signDetail, String Cost) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(signType, "UTF-8");
+            data += "&" + URLEncoder.encode("server", "UTF-8") + "=" + URLEncoder.encode(serverName, "UTF-8");
+            data += "&" + URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
+            data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(signDetail, "UTF-8");
+            data += "&" + URLEncoder.encode("cost", "UTF-8") + "=" + URLEncoder.encode(Cost, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/logsigntransaction.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+        }
+        return result;
+    }
+
+    public static boolean RemoveSign(String authHash, String location) {
+        boolean result = false;
+            try {
+                // Construct data
+
+                String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
+                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+                // Send data
+                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removesign.php");
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setConnectTimeout(Settings.httpTimeOut);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+
+                // Get the response
+                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line = null;
+                while ((line = rd.readLine()) != null) {
+                    if (line.toLowerCase().contains("true")) {
+                        result = true;
+                        break;
+                    }
+                }
+                wr.close();
+                rd.close();
+            }
+            catch (Exception e) {
+            }
+            return result;
+    }
+
+    public static boolean createSign(String authHash, String location, String line3, String name) {
+        boolean result = false;
+            try {
+                // Construct data
+
+                String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
+                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+                data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+                data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(line3, "UTF-8");
+                
+                // Send data
+                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/createsign.php");
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setConnectTimeout(Settings.httpTimeOut);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+
+                // Get the response
+                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line = null;
+                while ((line = rd.readLine()) != null) {
+                    if (line.toLowerCase().contains("true")) {
+                        result = true;
+                        break;
+                    }
+                }
+                wr.close();
+                rd.close();
+            }
+            catch (Exception e) {
+            }
+            return result;
+    }
+
+    public static String getSignDetails(String authHash, String location) {
+        String output = "";
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getlinefromsign.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            String line;
+            while ((line = rd.readLine()) != null) {
+                output += line;
+            }
+            wr.close();
+            rd.close();
+        }
+        catch (Exception e) {
+            return output;
+        }
+
+        String[] split = output.split(":");
+        if (split.length == 2) {
+            split[1] = split[1].replaceAll("}", "");
+            split[1] = split[1].replaceAll("\"", "");
+            output = split[1];
+            
+        }
+        return output;
+    }
+    
+    
+    
+    public static String[] getTempCommand(String authHash, String playerName) {
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettempcommand.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String input = rd.readLine();
+            JSONArray json = (JSONArray) new JSONParser().parse(input);
+
+            wr.close();
+            rd.close();
+
+            
+            for (Object o : json) {
+                String toString = o.toString();
+                String[] split = toString.split("~");
+                return split;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+    
+    public static boolean addTempCommand(String authHash, String playerName, String packageName) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("packageName", "UTF-8") + "=" + URLEncoder.encode(packageName, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/addtempcommand.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return result;
+        }
+        return result;
+    }
+    
+    public static boolean removeTempCommand(String authHash, String playerName, String packageName) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("packageName", "UTF-8") + "=" + URLEncoder.encode(packageName, "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removetempcommand.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+            return result;
+        }
+        return result;
     }
 
 }
