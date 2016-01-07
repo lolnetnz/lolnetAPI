@@ -23,4 +23,8 @@
             <type>jar</type>
         </dependency>
   </dependencies>
+  
+  <build>
+    <finalName>LolnetAPI_Core</finalName>
+    </build>
 </project>
