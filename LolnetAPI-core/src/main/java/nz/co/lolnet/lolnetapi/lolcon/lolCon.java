@@ -92,6 +92,95 @@ public class lolCon {
 
         return Double.parseDouble(json.get("playermultiplier").toString());
     }
+    
+    public static double getPlayerVoteValueMultiplier2(String playername) throws UnsupportedEncodingException, IOException, org.json.simple.parser.ParseException {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayervotevaluemultiplier2.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(1000);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return Double.parseDouble(json.get("playermultiplier").toString());
+    }
+    
+    
+    public static boolean setPlayerVoteValueMultiplier(String authHash, String playerName, double ammount) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("ammount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(ammount), "UTF-8");
+
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/setplayervotevaluemultiplier.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+            return result;
+        }
+        return result;
+    }
+
+    public static boolean setPlayerVoteValueMultiplier2(String authHash, String playerName, double ammount) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("ammount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(ammount), "UTF-8");
+
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/setplayervotevaluemultiplier2.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+            return result;
+        }
+        return result;
+    }
 
     public static long getPlayerBonusClaimBlocks(String playername) throws UnsupportedEncodingException, IOException, ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
