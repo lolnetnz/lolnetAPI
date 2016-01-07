@@ -10,7 +10,7 @@
         
 	<module>bukkit</module>
     <module>bungee</module>
-    <module>Core</module>
+    <module>LolnetAPI-core</module>
     </modules>
     
     <properties>
