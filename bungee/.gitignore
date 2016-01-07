@@ -1,7 +1,7 @@
 /build/
 /dist/
 /nbproject/private/
-/Target/
+/target/
 .project
 .settings
 .classpath
