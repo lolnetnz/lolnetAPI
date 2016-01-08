@@ -22,7 +22,7 @@ import org.json.simple.parser.ParseException;
 public class lolStats {
 
     public static void logPlayerIP(String authHash, String playername, String ipaddress) throws UnsupportedEncodingException, MalformedURLException, IOException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("ipaddress", "UTF-8") + "=" + URLEncoder.encode(ipaddress, "UTF-8");
 
@@ -37,7 +37,7 @@ public class lolStats {
     }
 
     public static void logPlayerFood(String authHash, String playername, String servername, String foodname) throws UnsupportedEncodingException, MalformedURLException, IOException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("foodname", "UTF-8") + "=" + URLEncoder.encode(foodname, "UTF-8");
@@ -75,7 +75,7 @@ public class lolStats {
     
     public static void logBlockBreak(String authHash, String playername, String servername, String materialname) throws UnsupportedEncodingException, MalformedURLException, IOException
     {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("materialname", "UTF-8") + "=" + URLEncoder.encode(materialname, "UTF-8");
@@ -92,7 +92,7 @@ public class lolStats {
     
     public static void logEntityVsPlayerDeath(String authHash, String playername, String servername, String killername) throws UnsupportedEncodingException, MalformedURLException, IOException
     {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("killername", "UTF-8") + "=" + URLEncoder.encode(killername, "UTF-8");
@@ -109,7 +109,7 @@ public class lolStats {
     
     public static void logPlayerVsEntityDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException
     {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("killedname", "UTF-8") + "=" + URLEncoder.encode(killedname, "UTF-8");
@@ -126,7 +126,7 @@ public class lolStats {
     
     public static void logPlayerVsPlayerDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException
     {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("killedname", "UTF-8") + "=" + URLEncoder.encode(killedname, "UTF-8");
@@ -166,7 +166,7 @@ public class lolStats {
     {
         if(isPlayerRegisteredElo(playername, servername))
         {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
             data += "&" + URLEncoder.encode("elorating", "UTF-8") + "=" + URLEncoder.encode(elorating + "", "UTF-8");
@@ -184,7 +184,7 @@ public class lolStats {
     
     public static void logPlayerNumbers(String authHash, String servername, int numplayers) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
     {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("numplayers", "UTF-8") + "=" + URLEncoder.encode(numplayers + "", "UTF-8");
 
@@ -202,7 +202,7 @@ public class lolStats {
     {
         if(!isPlayerRegisteredElo(playername, servername))
         {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
             data += "&" + URLEncoder.encode("elorating", "UTF-8") + "=" + URLEncoder.encode(elorating + "", "UTF-8");
@@ -243,7 +243,7 @@ public class lolStats {
     {
         if(!isPlayerRegisteredElo(playername, servername))
         {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
 
@@ -262,7 +262,7 @@ public class lolStats {
     {
         if(isPlayerRegisteredTime(playername, servername))
         {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
             data += "&" + URLEncoder.encode("hours", "UTF-8") + "=" + URLEncoder.encode(hours + "", "UTF-8");

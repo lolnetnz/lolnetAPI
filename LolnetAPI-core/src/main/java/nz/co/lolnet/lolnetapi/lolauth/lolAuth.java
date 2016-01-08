@@ -38,7 +38,7 @@ public class lolAuth {
     public static boolean login(String authHash, String playername, String UUID, String password) throws IOException, ParseException {
         String version = "2";
 
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
         data += "&" + URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
         data += "&" + URLEncoder.encode("version", "UTF-8") + "=" + URLEncoder.encode(version, "UTF-8");
@@ -131,7 +131,7 @@ public class lolAuth {
          String playerIP = cleanIpAddress(ip);
          long emailHash = emailHash(email);
         
-         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
          data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
          data += "&" + URLEncoder.encode("player_password", "UTF-8") + "=" + URLEncoder.encode(passwordHash, "UTF-8");
          data += "&" + URLEncoder.encode("user_email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");

@@ -40,7 +40,8 @@ public class lolCon {
     }
 
     public static void registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        authHash = Settings.checkAPIKey(authHash);
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername + "", "UTF-8");
 
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/registernewplayer.php");
@@ -115,12 +116,13 @@ public class lolCon {
     
     
     public static boolean setPlayerVoteValueMultiplier(String authHash, String playerName, double ammount) {
+        authHash = Settings.checkAPIKey(authHash);
         boolean result = false;
         try {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("ammount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(ammount), "UTF-8");
 
             // Send data
@@ -149,12 +151,13 @@ public class lolCon {
     }
 
     public static boolean setPlayerVoteValueMultiplier2(String authHash, String playerName, double ammount) {
+        authHash = Settings.checkAPIKey(authHash);
         boolean result = false;
         try {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("ammount", "UTF-8") + "=" + URLEncoder.encode(Double.toString(ammount), "UTF-8");
 
             // Send data
@@ -222,13 +225,13 @@ public class lolCon {
         return (String) json.get("playerTitle");
     }
 
-    public static boolean updatetPlayerTitle(String playerName, String newTitle,String authhash) {
+    public static boolean updatetPlayerTitle(String playerName, String newTitle,String authHash) {
         boolean result = false;
         try {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authhash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("newtitle", "UTF-8") + "=" + URLEncoder.encode(newTitle, "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayertitle.php");
@@ -296,13 +299,13 @@ public class lolCon {
         return (String) json.get("playerName");
     }
 
-    public static boolean updatetPlayerNick(String playerName, String newNick,String authhash) {
+    public static boolean updatetPlayerNick(String playerName, String newNick,String authHash) {
     boolean result = false;
         try {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authhash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("newnick", "UTF-8") + "=" + URLEncoder.encode(newNick, "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayernick.php");
@@ -358,11 +361,11 @@ public class lolCon {
     public static HashMap<String, Integer> getForumGroups(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         return getForumGroupsNameKey(authHash);
     }
-
+    
     public static HashMap<String, Integer> getForumGroupsNameKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         HashMap<String, Integer> output = new HashMap<>();
 
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
 
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
@@ -394,7 +397,7 @@ public class lolCon {
     public static HashMap<Integer, String> getForumGroupsIDKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         HashMap<Integer, String> output = new HashMap<>();
 
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
 
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
@@ -424,7 +427,7 @@ public class lolCon {
     }
 
     public static int getForumUserID(String authHash, String username) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
 
         // Send data
@@ -456,7 +459,7 @@ public class lolCon {
     public static ArrayList<Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         ArrayList<Integer> output = new ArrayList<>();
 
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
         data += "&" + URLEncoder.encode("userforumid", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
 
         // Send data
@@ -485,7 +488,7 @@ public class lolCon {
         boolean success = false;
         int playerForumID = getForumUserID(authHash, playerName);
         if (!userAlreadyBelongsToGroup(authHash, playerForumID, groupID)) {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("groupid", "UTF-8") + "=" + URLEncoder.encode(groupID + "", "UTF-8");
             data += "&" + URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(playerForumID + "", "UTF-8");
 
@@ -511,7 +514,7 @@ public class lolCon {
         boolean success = false;
         int playerForumID = getForumUserID(authHash, playerName);
         if (userAlreadyBelongsToGroup(authHash, playerForumID, groupID)) {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("groupid", "UTF-8") + "=" + URLEncoder.encode(groupID + "", "UTF-8");
             data += "&" + URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(playerForumID + "", "UTF-8");
 
@@ -539,7 +542,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("serverName", "UTF-8") + "=" + URLEncoder.encode(serverName, "UTF-8");
             data += "&" + URLEncoder.encode("serviceName", "UTF-8") + "=" + URLEncoder.encode(serviceName, "UTF-8");
             // Send data
@@ -597,7 +600,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(balanceChange), "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbonusclaimblocks.php");
@@ -632,7 +635,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/playerexistsinlolcoindatabase.php");
             URLConnection conn = url.openConnection();
@@ -666,7 +669,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(balanceChange), "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
@@ -700,7 +703,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("balancechange", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(balanceChange), "UTF-8");
             data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(logInfomation, "UTF-8");
             // Send data
@@ -741,7 +744,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(userName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode(signType, "UTF-8");
             data += "&" + URLEncoder.encode("server", "UTF-8") + "=" + URLEncoder.encode(serverName, "UTF-8");
             data += "&" + URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
@@ -779,7 +782,7 @@ public class lolCon {
                 // Construct data
 
                 String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
-                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
                 // Send data
                 URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removesign.php");
                 URLConnection conn = url.openConnection();
@@ -812,7 +815,7 @@ public class lolCon {
                 // Construct data
 
                 String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
-                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
                 data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
                 data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(line3, "UTF-8");
                 
@@ -848,7 +851,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getlinefromsign.php");
             URLConnection conn = url.openConnection();
@@ -889,7 +892,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettempcommand.php");
             URLConnection conn = url.openConnection();
@@ -926,7 +929,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("packageName", "UTF-8") + "=" + URLEncoder.encode(packageName, "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/addtempcommand.php");
@@ -961,7 +964,7 @@ public class lolCon {
             // Construct data
 
             String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             data += "&" + URLEncoder.encode("packageName", "UTF-8") + "=" + URLEncoder.encode(packageName, "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removetempcommand.php");
