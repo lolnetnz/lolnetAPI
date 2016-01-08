@@ -39,19 +39,40 @@ public class lolCon {
         }
     }
 
-    public static void registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        authHash = Settings.checkAPIKey(authHash);
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
-        data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername + "", "UTF-8");
+    public static boolean registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        if (playerExists(authHash,playername)) {
+            return true;
+        } else {
+            boolean result = false;
+            try {
+                // Construct data
 
-        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/registernewplayer.php");
-        URLConnection conn = url.openConnection();
-        conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
-        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-        wr.write(data);
-        wr.flush();
-        wr.close();
+                String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+                // Send data
+                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/registernewplayer.php");
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                conn.setConnectTimeout(Settings.httpTimeOut);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+
+                // Get the response
+                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line = null;
+                while ((line = rd.readLine()) != null) {
+                    if (line.toLowerCase().contains("true")) {
+                        result = true;
+                        break;
+                    }
+                }
+                wr.close();
+                rd.close();
+            } catch (Exception e) {
+            }
+            return result;
+        }
     }
 
     public static long getPlayerBalance(String playername) throws UnsupportedEncodingException, IOException, ParseException {
