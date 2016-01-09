@@ -9,8 +9,8 @@
   </parent>
   
   <groupId>nz.co.lolnet</groupId>
-  <artifactId>bungee</artifactId>
-  <name>bungee</name>
+  <artifactId>LolnetAPI-bungee</artifactId>
+  <name>LolnetAPI-bungee</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

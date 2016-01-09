@@ -8,8 +8,8 @@
     
     <modules>
         
-	<module>bukkit</module>
-    <module>bungee</module>
+	<module>LolnetAPI-bukkit</module>
+    <module>LolnetAPI-bungee</module>
     <module>LolnetAPI-core</module>
     </modules>
     
