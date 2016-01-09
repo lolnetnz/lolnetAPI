@@ -2,16 +2,18 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>nz.co.lolnet</groupId>
+  <artifactId>LolnetAPI-core</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <name>LolnetAPI-core</name>
+  
   <parent>
     <groupId>nz.co.lolnet</groupId>
     <artifactId>LolnetAPI</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>nz.co.lolnet</groupId>
-  <artifactId>LolnetAPI-core</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>LolnetAPI-core</name>
-  <url>http://maven.apache.org</url>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
