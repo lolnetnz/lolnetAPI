@@ -29,8 +29,6 @@ import org.json.simple.parser.ParseException;
  */
 public class lolCon {
     
-    private static ArrayList<Integer> forumUserForumGroups = new ArrayList<>();
-    static long forumUserForumGroupsLastUpldate = 0;
     public static void main(String[] args) {
         try {
             System.out.println(nz.co.lolnet.lolnetapi.lolcon.lolCon.getPlayerBalance("james137137"));
@@ -480,11 +478,6 @@ public class lolCon {
         }
 
     public static ArrayList<Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        
-        if (System.currentTimeMillis() - forumUserForumGroupsLastUpldate <= 60*1000)
-        {
-            return lolCon.forumUserForumGroups;
-        }
         ArrayList<Integer> output = new ArrayList<>();
 
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
@@ -508,9 +501,7 @@ public class lolCon {
         for (Object o : json) {
             output.add(Integer.parseInt(o.toString()));
         }
-        
-        lolCon.forumUserForumGroups = output;
-        
+
         return output;
     }
 
