@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>nz.co.lolnet</groupId>
-    <artifactId>LolnetAPI</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-  <groupId>nz.co.lolnet</groupId>
-  <artifactId>LolnetAPI-bukkit</artifactId>
-  <name>LolnetAPI-bukkit</name>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>nz.co.lolnet</groupId>
+        <artifactId>LolnetAPI</artifactId>
+        <version>1.0.1</version>
+    </parent>
   
-  <dependencies>
+  
+    <groupId>nz.co.lolnet</groupId>
+    <artifactId>LolnetAPI-bukkit</artifactId>
+    <name>LolnetAPI-bukkit</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+  
+    <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
@@ -35,7 +37,7 @@
     </repositories>
     
     <build>
-    <finalName>LolnetAPI_Bukkit</finalName>
+        <finalName>LolnetAPI_Bukkit</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
