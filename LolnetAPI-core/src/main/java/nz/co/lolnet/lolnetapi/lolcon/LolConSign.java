@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,6 +22,7 @@ import nz.co.lolnet.lolnetapi.settings.Settings;
  */
 public class LolConSign {
     
+    public static HashMap<String,Object> CustomItems = new HashMap<>();
     //29/05/2014 - CptWin - Added throwing exceptions and return statement
     public static boolean logSignTransaction(String authHash,String userName, String signType, String serverName, String location, String signDetail, String Cost) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
 

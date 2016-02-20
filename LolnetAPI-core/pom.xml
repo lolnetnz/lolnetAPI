@@ -5,7 +5,7 @@
   
   <groupId>nz.co.lolnet</groupId>
   <artifactId>LolnetAPI-core</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1</version>
   <name>LolnetAPI-core</name>
   
   <parent>
