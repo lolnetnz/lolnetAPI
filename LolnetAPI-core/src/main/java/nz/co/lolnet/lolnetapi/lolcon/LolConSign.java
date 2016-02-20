@@ -23,6 +23,18 @@ import nz.co.lolnet.lolnetapi.settings.Settings;
 public class LolConSign {
     
     public static HashMap<String,Object> CustomItems = new HashMap<>();
+    
+    public void addCustomItem(String name, Object object)
+    {
+        CustomItems.put(name, object);
+    }
+    
+    public void removeCustomItem(String name)
+    {
+        CustomItems.remove(name);
+    }
+    
+    
     //29/05/2014 - CptWin - Added throwing exceptions and return statement
     public static boolean logSignTransaction(String authHash,String userName, String signType, String serverName, String location, String signDetail, String Cost) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
 

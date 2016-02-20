@@ -3,17 +3,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   
-  <groupId>nz.co.lolnet</groupId>
-  <artifactId>LolnetAPI-core</artifactId>
-  <version>1.0.1</version>
-  <name>LolnetAPI-core</name>
+  
   
   <parent>
     <groupId>nz.co.lolnet</groupId>
     <artifactId>LolnetAPI</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
   
+  <groupId>nz.co.lolnet</groupId>
+  <artifactId>LolnetAPI-core</artifactId>
+  <name>LolnetAPI-core</name>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
