@@ -24,12 +24,12 @@ public class LolConSign {
     
     public static HashMap<String,Object> CustomItems = new HashMap<>();
     
-    public void addCustomItem(String name, Object object)
+    public static void addCustomItem(String name, Object object)
     {
         CustomItems.put(name, object);
     }
     
-    public void removeCustomItem(String name)
+    public static void removeCustomItem(String name)
     {
         CustomItems.remove(name);
     }
