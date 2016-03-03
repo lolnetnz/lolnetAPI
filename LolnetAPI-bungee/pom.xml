@@ -11,6 +11,7 @@
   <groupId>nz.co.lolnet</groupId>
   <artifactId>LolnetAPI-bungee</artifactId>
   <name>LolnetAPI-bungee</name>
+  <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

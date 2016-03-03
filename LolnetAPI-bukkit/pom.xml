@@ -7,6 +7,7 @@
         <artifactId>LolnetAPI</artifactId>
         <version>1.0.2</version>
     </parent>
+    <packaging>jar</packaging>
   
   
     <groupId>nz.co.lolnet</groupId>
@@ -37,7 +38,7 @@
     </repositories>
     
     <build>
-        <finalName>LolnetAPI_Bukkit</finalName>
+        <finalName>lolnetAPI</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
