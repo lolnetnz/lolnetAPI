@@ -9,7 +9,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.CRC32;
+import nz.co.lolnet.lolnetapi.APIKeyNotSetException;
 import nz.co.lolnet.lolnetapi.settings.Settings;
 
 import org.json.simple.JSONObject;
@@ -37,8 +40,13 @@ public class lolAuth {
      */
     public static boolean login(String authHash, String playername, String UUID, String password) throws IOException, ParseException {
         String version = "2";
-
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolAuth.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8");
         data += "&" + URLEncoder.encode("uuid", "UTF-8") + "=" + URLEncoder.encode(UUID, "UTF-8");
         data += "&" + URLEncoder.encode("version", "UTF-8") + "=" + URLEncoder.encode(version, "UTF-8");
@@ -123,6 +131,12 @@ public class lolAuth {
      * @throws ParseException
      */
     public static boolean register(String authHash, String playerName, String UUID, String email, String ip, String password) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolAuth.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         PhpbbHandler phpbbhandler = new PhpbbHandler();
         
          //Prepare all data needed to register
@@ -131,7 +145,7 @@ public class lolAuth {
          String playerIP = cleanIpAddress(ip);
          long emailHash = emailHash(email);
         
-         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
          data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
          data += "&" + URLEncoder.encode("player_password", "UTF-8") + "=" + URLEncoder.encode(passwordHash, "UTF-8");
          data += "&" + URLEncoder.encode("user_email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8");

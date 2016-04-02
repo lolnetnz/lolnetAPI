@@ -9,6 +9,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import nz.co.lolnet.lolnetapi.APIKeyNotSetException;
 import nz.co.lolnet.lolnetapi.settings.Settings;
 
 import org.json.simple.JSONObject;
@@ -22,7 +25,13 @@ import org.json.simple.parser.ParseException;
 public class lolStats {
 
     public static void logPlayerIP(String authHash, String playername, String ipaddress) throws UnsupportedEncodingException, MalformedURLException, IOException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("ipaddress", "UTF-8") + "=" + URLEncoder.encode(ipaddress, "UTF-8");
 
@@ -37,7 +46,13 @@ public class lolStats {
     }
 
     public static void logPlayerFood(String authHash, String playername, String servername, String foodname) throws UnsupportedEncodingException, MalformedURLException, IOException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("foodname", "UTF-8") + "=" + URLEncoder.encode(foodname, "UTF-8");
@@ -72,10 +87,15 @@ public class lolStats {
 
         return (double) json.get("elo");
     }
-    
-    public static void logBlockBreak(String authHash, String playername, String servername, String materialname) throws UnsupportedEncodingException, MalformedURLException, IOException
-    {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void logBlockBreak(String authHash, String playername, String servername, String materialname) throws UnsupportedEncodingException, MalformedURLException, IOException {
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("materialname", "UTF-8") + "=" + URLEncoder.encode(materialname, "UTF-8");
@@ -89,10 +109,15 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
-    
-    public static void logEntityVsPlayerDeath(String authHash, String playername, String servername, String killername) throws UnsupportedEncodingException, MalformedURLException, IOException
-    {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void logEntityVsPlayerDeath(String authHash, String playername, String servername, String killername) throws UnsupportedEncodingException, MalformedURLException, IOException {
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("killername", "UTF-8") + "=" + URLEncoder.encode(killername, "UTF-8");
@@ -106,10 +131,15 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
-    
-    public static void logPlayerVsEntityDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException
-    {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void logPlayerVsEntityDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException {
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("killedname", "UTF-8") + "=" + URLEncoder.encode(killedname, "UTF-8");
@@ -123,10 +153,15 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
-    
-    public static void logPlayerVsPlayerDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException
-    {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void logPlayerVsPlayerDeath(String authHash, String playername, String servername, String killedname) throws UnsupportedEncodingException, MalformedURLException, IOException {
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("killedname", "UTF-8") + "=" + URLEncoder.encode(killedname, "UTF-8");
@@ -140,9 +175,8 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
-    
-    public static boolean isPlayerRegisteredElo(String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
+
+    public static boolean isPlayerRegisteredElo(String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
 
@@ -153,20 +187,24 @@ public class lolStats {
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
-        
+
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         wr.close();
         rd.close();
-        
+
         return (boolean) json.get("registered");
     }
-    
-    public static void updatePlayerElo(String authHash, String playername, String servername, int elorating) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
-        if(isPlayerRegisteredElo(playername, servername))
-        {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void updatePlayerElo(String authHash, String playername, String servername, int elorating) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        if (isPlayerRegisteredElo(playername, servername)) {
+            try {
+                authHash = Settings.checkAPIKey(authHash);
+            } catch (APIKeyNotSetException ex) {
+                Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
             data += "&" + URLEncoder.encode("elorating", "UTF-8") + "=" + URLEncoder.encode(elorating + "", "UTF-8");
@@ -181,10 +219,15 @@ public class lolStats {
             wr.close();
         }
     }
-    
-    public static void logPlayerNumbers(String authHash, String servername, int numplayers) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void logPlayerNumbers(String authHash, String servername, int numplayers) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("numplayers", "UTF-8") + "=" + URLEncoder.encode(numplayers + "", "UTF-8");
 
@@ -197,12 +240,16 @@ public class lolStats {
         wr.flush();
         wr.close();
     }
-    
-    public static void registerPlayerElo(String authHash, String playername, String servername, int elorating) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
-        if(!isPlayerRegisteredElo(playername, servername))
-        {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void registerPlayerElo(String authHash, String playername, String servername, int elorating) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        if (!isPlayerRegisteredElo(playername, servername)) {
+            try {
+                authHash = Settings.checkAPIKey(authHash);
+            } catch (APIKeyNotSetException ex) {
+                Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
             data += "&" + URLEncoder.encode("elorating", "UTF-8") + "=" + URLEncoder.encode(elorating + "", "UTF-8");
@@ -217,9 +264,8 @@ public class lolStats {
             wr.close();
         }
     }
-    
-    public static boolean isPlayerRegisteredTime(String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
+
+    public static boolean isPlayerRegisteredTime(String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
 
@@ -230,20 +276,24 @@ public class lolStats {
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
-        
+
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
         wr.close();
         rd.close();
-        
+
         return (boolean) json.get("registered");
     }
-    
-    public static void registerPlayerTime(String authHash, String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
-        if(!isPlayerRegisteredElo(playername, servername))
-        {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void registerPlayerTime(String authHash, String playername, String servername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        if (!isPlayerRegisteredElo(playername, servername)) {
+            try {
+                authHash = Settings.checkAPIKey(authHash);
+            } catch (APIKeyNotSetException ex) {
+                Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
 
@@ -257,12 +307,16 @@ public class lolStats {
             wr.close();
         }
     }
-    
-    public static void updatePlayerTime(String authHash, String playername, String servername, int hours) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException
-    {
-        if(isPlayerRegisteredTime(playername, servername))
-        {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+    public static void updatePlayerTime(String authHash, String playername, String servername, int hours) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        if (isPlayerRegisteredTime(playername, servername)) {
+            try {
+                authHash = Settings.checkAPIKey(authHash);
+            } catch (APIKeyNotSetException ex) {
+                Logger.getLogger(lolStats.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
             data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
             data += "&" + URLEncoder.encode("hours", "UTF-8") + "=" + URLEncoder.encode(hours + "", "UTF-8");

@@ -7,6 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import nz.co.lolnet.lolnetapi.APIKeyNotSetException;
 import nz.co.lolnet.lolnetapi.settings.Settings;
 
 /**
@@ -17,7 +20,14 @@ public class lolChat {
     
     public static void recordMessage(String authHash, String servername, String playername, String message) throws UnsupportedEncodingException, MalformedURLException, IOException
     {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolChat.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        }
+        
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("servername", "UTF-8") + "=" + URLEncoder.encode(servername, "UTF-8");
         data += "&" + URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
         data += "&" + URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode(message, "UTF-8");

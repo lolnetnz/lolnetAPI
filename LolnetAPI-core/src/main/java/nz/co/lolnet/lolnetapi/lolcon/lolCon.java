@@ -14,6 +14,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import nz.co.lolnet.lolnetapi.APIKeyNotSetException;
 import nz.co.lolnet.lolnetapi.settings.Settings;
 
 import org.json.simple.JSONArray;
@@ -125,7 +128,12 @@ public class lolCon {
     
     
     public static boolean setPlayerVoteValueMultiplier(String authHash, String playerName, double ammount) {
-        authHash = Settings.checkAPIKey(authHash);
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         boolean result = false;
         try {
             // Construct data
@@ -160,7 +168,12 @@ public class lolCon {
     }
 
     public static boolean setPlayerVoteValueMultiplier2(String authHash, String playerName, double ammount) {
-        authHash = Settings.checkAPIKey(authHash);
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         boolean result = false;
         try {
             // Construct data
@@ -373,8 +386,13 @@ public class lolCon {
     
     public static HashMap<String, Integer> getForumGroupsNameKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         HashMap<String, Integer> output = new HashMap<>();
-
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return output;
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
 
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
@@ -406,8 +424,14 @@ public class lolCon {
     public static HashMap<Integer, String> getForumGroupsIDKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         HashMap<Integer, String> output = new HashMap<>();
 
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
-
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return output;
+        }
+        
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
         URLConnection conn = url.openConnection();
@@ -436,7 +460,13 @@ public class lolCon {
     }
 
     public static int getForumUserID(String authHash, String username) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            throw new NoSuchObjectException("API key not set");
+        }
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(username, "UTF-8");
 
         // Send data
@@ -467,8 +497,14 @@ public class lolCon {
 
     public static ArrayList<Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         ArrayList<Integer> output = new ArrayList<>();
-
-        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return output;
+        }
+        
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("userforumid", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
 
         // Send data
@@ -495,9 +531,15 @@ public class lolCon {
 
     public static boolean addUserToForumGroup(String authHash, String playerName, int groupID) throws MalformedURLException, IOException, UnsupportedEncodingException, ParseException {
         boolean success = false;
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         int playerForumID = getForumUserID(authHash, playerName);
         if (!userAlreadyBelongsToGroup(authHash, playerForumID, groupID)) {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("groupid", "UTF-8") + "=" + URLEncoder.encode(groupID + "", "UTF-8");
             data += "&" + URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(playerForumID + "", "UTF-8");
 
@@ -521,9 +563,15 @@ public class lolCon {
 
     public static boolean removeUserFromForumGroup(String authHash, String playerName, int groupID) throws MalformedURLException, IOException, UnsupportedEncodingException, ParseException {
         boolean success = false;
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
         int playerForumID = getForumUserID(authHash, playerName);
         if (userAlreadyBelongsToGroup(authHash, playerForumID, groupID)) {
-            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("groupid", "UTF-8") + "=" + URLEncoder.encode(groupID + "", "UTF-8");
             data += "&" + URLEncoder.encode("userid", "UTF-8") + "=" + URLEncoder.encode(playerForumID + "", "UTF-8");
 
@@ -548,10 +596,16 @@ public class lolCon {
 
     public static long getLastVoted(String authHash, String playerName, String serverName, String serviceName) {
         try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        try {
             // Construct data
 
             String data = URLEncoder.encode("playerName", "UTF-8") + "=" + URLEncoder.encode(playerName, "UTF-8");
-            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
             data += "&" + URLEncoder.encode("serverName", "UTF-8") + "=" + URLEncoder.encode(serverName, "UTF-8");
             data += "&" + URLEncoder.encode("serviceName", "UTF-8") + "=" + URLEncoder.encode(serviceName, "UTF-8");
             // Send data

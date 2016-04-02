@@ -5,7 +5,13 @@
  */
 package nz.co.lolnet.lolnetapi;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import nz.co.lolnet.lolnetapi.lolcon.lolCon;
 import nz.co.lolnet.lolnetapi.settings.Settings;
+import org.json.simple.parser.ParseException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,6 +49,16 @@ public class APIKeyNotSetExceptionTest {
         Settings.checkAPIKey(null);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void test()
+    {
+        try {
+            lolCon.getForumUserID(null, "James137137");
+        } catch (Exception ex) {
+            Logger.getLogger(APIKeyNotSetExceptionTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
