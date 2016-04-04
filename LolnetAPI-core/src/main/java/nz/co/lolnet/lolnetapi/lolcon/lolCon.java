@@ -31,7 +31,7 @@ import org.json.simple.parser.ParseException;
 public class lolCon {
 
     public static boolean registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        if (playerExists(authHash,playername)) {
+        if (playerExists(authHash, playername)) {
             return true;
         } else {
             boolean result = false;
@@ -105,7 +105,7 @@ public class lolCon {
 
         return Double.parseDouble(json.get("playermultiplier").toString());
     }
-    
+
     public static double getPlayerVoteValueMultiplier2(String playername) throws UnsupportedEncodingException, IOException, org.json.simple.parser.ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
 
@@ -125,8 +125,7 @@ public class lolCon {
 
         return Double.parseDouble(json.get("playermultiplier").toString());
     }
-    
-    
+
     public static boolean setPlayerVoteValueMultiplier(String authHash, String playerName, double ammount) {
         try {
             authHash = Settings.checkAPIKey(authHash);
@@ -247,7 +246,7 @@ public class lolCon {
         return (String) json.get("playerTitle");
     }
 
-    public static boolean updatetPlayerTitle(String playerName, String newTitle,String authHash) {
+    public static boolean updatetPlayerTitle(String playerName, String newTitle, String authHash) {
         boolean result = false;
         try {
             // Construct data
@@ -274,8 +273,7 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return result;
         }
         return result;
@@ -321,8 +319,8 @@ public class lolCon {
         return (String) json.get("playerName");
     }
 
-    public static boolean updatetPlayerNick(String playerName, String newNick,String authHash) {
-    boolean result = false;
+    public static boolean updatetPlayerNick(String playerName, String newNick, String authHash) {
+        boolean result = false;
         try {
             // Construct data
 
@@ -348,8 +346,7 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return result;
         }
         return result;
@@ -383,7 +380,7 @@ public class lolCon {
     public static HashMap<String, Integer> getForumGroups(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         return getForumGroupsNameKey(authHash);
     }
-    
+
     public static HashMap<String, Integer> getForumGroupsNameKey(String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         HashMap<String, Integer> output = new HashMap<>();
         try {
@@ -430,7 +427,7 @@ public class lolCon {
             Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
             return output;
         }
-        
+
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         // Send data
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
@@ -477,23 +474,23 @@ public class lolCon {
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
-        
+
         // Get the response
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
-        
+
         wr.close();
         rd.close();
 
-            Iterator<?> keys = json.keySet().iterator();
+        Iterator<?> keys = json.keySet().iterator();
 
-            while (keys.hasNext()) {
-                String user = (String) keys.next();
-                long forumid = (long) json.get(user);
-                return safeLongToInt(forumid);
-            }
-        throw new NoSuchObjectException("Username not found in Database!");
+        while (keys.hasNext()) {
+            String user = (String) keys.next();
+            long forumid = (long) json.get(user);
+            return safeLongToInt(forumid);
         }
+        throw new NoSuchObjectException("Username not found in Database!");
+    }
 
     public static ArrayList<Integer> getForumUserForumGroups(String authHash, int userForumID) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         ArrayList<Integer> output = new ArrayList<>();
@@ -503,7 +500,7 @@ public class lolCon {
             Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
             return output;
         }
-        
+
         String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
         data += "&" + URLEncoder.encode("userforumid", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
 
@@ -624,11 +621,9 @@ public class lolCon {
             wr.close();
             rd.close();
 
-            
             for (Object o : json) {
                 String toString = o.toString();
-                if (toString.length() <= 5)
-                {
+                if (toString.length() <= 5) {
                     return 0;
                 }
                 return (Timestamp.valueOf(toString).getTime());
@@ -636,7 +631,7 @@ public class lolCon {
 
         } catch (IOException | ParseException | IllegalArgumentException e) {
         }
-        
+
         return 0;
     }
 
@@ -656,7 +651,7 @@ public class lolCon {
         }
         return (int) l;
     }
-    
+
     public static boolean updatetPlayerBonusClaimBlocks(String authHash, String playerName, int balanceChange) {
         boolean result = false;
         try {
@@ -685,8 +680,7 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return result;
         }
         return result;
@@ -719,8 +713,7 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
         return result;
     }
@@ -753,13 +746,12 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return result;
         }
         return result;
     }
-    
+
     public static boolean updatePlayerBalance(String authHash, String playerName, int balanceChange, String logInfomation) {
         boolean result = false;
         try {
@@ -789,8 +781,7 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return result;
         }
         return result;
@@ -833,79 +824,76 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
         return result;
     }
 
     public static boolean RemoveSign(String authHash, String location) {
         boolean result = false;
-            try {
-                // Construct data
+        try {
+            // Construct data
 
-                String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
-                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
-                // Send data
-                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removesign.php");
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                conn.setConnectTimeout(Settings.httpTimeOut);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write(data);
-                wr.flush();
+            String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removesign.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
 
-                // Get the response
-                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String line = null;
-                while ((line = rd.readLine()) != null) {
-                    if (line.toLowerCase().contains("true")) {
-                        result = true;
-                        break;
-                    }
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
                 }
-                wr.close();
-                rd.close();
             }
-            catch (Exception e) {
-            }
-            return result;
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+        }
+        return result;
     }
 
     public static boolean createSign(String authHash, String location, String line3, String name) {
         boolean result = false;
-            try {
-                // Construct data
+        try {
+            // Construct data
 
-                String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
-                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
-                data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
-                data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(line3, "UTF-8");
-                
-                // Send data
-                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/createsign.php");
-                URLConnection conn = url.openConnection();
-                conn.setDoOutput(true);
-                conn.setConnectTimeout(Settings.httpTimeOut);
-                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-                wr.write(data);
-                wr.flush();
+            String data = URLEncoder.encode("location", "UTF-8") + "=" + URLEncoder.encode(location, "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            data += "&" + URLEncoder.encode("username", "UTF-8") + "=" + URLEncoder.encode(name, "UTF-8");
+            data += "&" + URLEncoder.encode("details", "UTF-8") + "=" + URLEncoder.encode(line3, "UTF-8");
 
-                // Get the response
-                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String line = null;
-                while ((line = rd.readLine()) != null) {
-                    if (line.toLowerCase().contains("true")) {
-                        result = true;
-                        break;
-                    }
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/createsign.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
                 }
-                wr.close();
-                rd.close();
             }
-            catch (Exception e) {
-            }
-            return result;
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+        }
+        return result;
     }
 
     public static String getSignDetails(String authHash, String location) {
@@ -933,8 +921,7 @@ public class lolCon {
             }
             wr.close();
             rd.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             return output;
         }
 
@@ -943,13 +930,11 @@ public class lolCon {
             split[1] = split[1].replaceAll("}", "");
             split[1] = split[1].replaceAll("\"", "");
             output = split[1];
-            
+
         }
         return output;
     }
-    
-    
-    
+
     public static String[] getTempCommand(String authHash, String playerName) {
         try {
             // Construct data
@@ -973,7 +958,6 @@ public class lolCon {
             wr.close();
             rd.close();
 
-            
             for (Object o : json) {
                 String toString = o.toString();
                 String[] split = toString.split("~");
@@ -985,7 +969,7 @@ public class lolCon {
         }
         return null;
     }
-    
+
     public static boolean addTempCommand(String authHash, String playerName, String packageName) {
         boolean result = false;
         try {
@@ -1020,7 +1004,7 @@ public class lolCon {
         }
         return result;
     }
-    
+
     public static boolean removeTempCommand(String authHash, String playerName, String packageName) {
         boolean result = false;
         try {
