@@ -1040,6 +1040,33 @@ public class lolCon {
     }
 
     public static int getForumUserIDFromDiscordID(String authHash, String discordUserID) throws UnsupportedEncodingException, IOException, ParseException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        int output = 0;
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return output;
+        }
+
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("discordid", "UTF-8") + "=" + URLEncoder.encode(discordUserID + "", "UTF-8");
+
+        // Send data
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuseridfromdiscordid.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String outputS = rd.readLine();
+        JSONObject json = (JSONObject) new JSONParser().parse(outputS);
+
+        wr.close();
+        rd.close();
+
+        return Integer.parseInt(json.get("forumid").toString());
     }
 }
