@@ -1055,4 +1055,7 @@ public class lolCon {
         return result;
     }
 
+    public static int getForumUserIDFromDiscord(String authHash, int discordUserID) throws UnsupportedEncodingException, IOException, ParseException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
