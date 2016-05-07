@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
   
   
   
-  <parent>
+    <parent>
+        <groupId>nz.co.lolnet</groupId>
+        <artifactId>LolnetAPI</artifactId>
+        <version>1.0.3</version>
+    </parent>
+  
     <groupId>nz.co.lolnet</groupId>
-    <artifactId>LolnetAPI</artifactId>
-    <version>1.0.3</version>
-  </parent>
-  
-  <groupId>nz.co.lolnet</groupId>
-  <artifactId>LolnetAPI-core</artifactId>
-  <name>LolnetAPI-core</name>
-  <packaging>jar</packaging>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
+    <artifactId>LolnetAPI-core</artifactId>
+    <name>LolnetAPI-core</name>
+    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
             <type>jar</type>
-    </dependency>
-  </dependencies>
+        </dependency>
+    </dependencies>
   
-  <build>
-    <finalName>LolnetAPI_Core</finalName>
+    <build>
+        <finalName>LolnetAPI_Core</finalName>
     </build>
 </project>

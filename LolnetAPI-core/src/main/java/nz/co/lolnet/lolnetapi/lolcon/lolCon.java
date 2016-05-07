@@ -448,9 +448,12 @@ public class lolCon {
         Iterator<?> keys = json.keySet().iterator();
 
         while (keys.hasNext()) {
-            String group_id = (String) keys.next();
-            String group_name = (String) json.get(group_id);
-            output.put(Integer.parseInt(group_id), group_name);
+            try {
+                String group_id = (String) keys.next();
+                String group_name = (String) json.get(group_id);
+                output.put(Integer.parseInt(group_id), group_name);
+            } catch (NullPointerException e) {
+            }
         }
 
         return output;
