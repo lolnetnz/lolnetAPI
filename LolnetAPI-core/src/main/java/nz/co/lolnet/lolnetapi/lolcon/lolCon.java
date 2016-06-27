@@ -299,10 +299,10 @@ public class lolCon {
         return (String) json.get("playerNickname");
     }
 
-    public static String getPlayerName(int userForumID) throws UnsupportedEncodingException, IOException, ParseException {
+    public static String getPlayerNameFromFourmID(int userForumID) throws UnsupportedEncodingException, IOException, ParseException {
         String data = URLEncoder.encode("playerid", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(userForumID), "UTF-8");
 
-        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayername.php");
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuseridfromdiscordid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
         conn.setConnectTimeout(Settings.httpTimeOut);
