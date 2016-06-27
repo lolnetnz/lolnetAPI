@@ -299,6 +299,26 @@ public class lolCon {
         return (String) json.get("playerNickname");
     }
 
+    public static String getPlayerName(int userForumID) throws UnsupportedEncodingException, IOException, ParseException {
+        String data = URLEncoder.encode("playerid", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(userForumID), "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerfromnick.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return (String) json.get("playerName");
+    }
+
     public static String getPlayerNameFromNick(String playerNick) throws UnsupportedEncodingException, IOException, ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playerNick, "UTF-8");
 
