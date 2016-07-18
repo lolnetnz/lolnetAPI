@@ -11,6 +11,7 @@
 	<module>LolnetAPI-bukkit</module>
     <module>LolnetAPI-bungee</module>
     <module>LolnetAPI-core</module>
+        <module>RestServer</module>
     </modules>
     
     <properties>
