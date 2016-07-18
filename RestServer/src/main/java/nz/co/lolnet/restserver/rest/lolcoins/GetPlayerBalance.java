@@ -17,10 +17,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import nz.co.lolnet.restserver.LolnetAPI;
 import nz.co.lolnet.restserver.Permissions;
 import nz.co.lolnet.restserver.mysql.LolnetMySQLConnection;
-import org.glassfish.hk2.api.PerLookup;
-import org.glassfish.jersey.server.ResourceConfig;
 import org.json.simple.JSONObject;
 
 /**
@@ -28,7 +27,11 @@ import org.json.simple.JSONObject;
  * @author James
  */
 @Path("/lolcoins/getplayerbalance")
-public class GetPlayerBalance {
+public class GetPlayerBalance extends LolnetAPI{
+
+    public GetPlayerBalance() {
+        super(null);
+    }
     
     @GET
     public String noInputHere() {

@@ -6,3 +6,4 @@
 .settings
 .classpath
 /LolnetAPI-core/nbproject/
+/RestServer/target/

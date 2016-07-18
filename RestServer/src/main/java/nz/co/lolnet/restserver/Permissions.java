@@ -5,7 +5,12 @@
  */
 package nz.co.lolnet.restserver;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nz.co.lolnet.restserver.rest.lolcoins.GetPlayerBalance;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  *
@@ -13,8 +18,30 @@ import nz.co.lolnet.restserver.rest.lolcoins.GetPlayerBalance;
  */
 public class Permissions {
 
-    public static void checkToken(String token, GetPlayerBalance aThis) {
+    public static boolean checkToken(String token, LolnetAPI api) {
+        if (api.getRequiredPermission() == null) {
+            return true;
+        }
         
+        String decrypt = Encryptor.decrypt(Main.getKey(), "RandomInitVector", token);
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(decrypt);
+            JSONObject jSONObject = (JSONObject) obj;
+            if (jSONObject.get("EVERYTHING") != null && jSONObject.get("EVERYTHING") == Boolean.TRUE)
+            {
+                return true;
+            }
+            
+            if (jSONObject.get(api.getRequiredPermission()) != null && jSONObject.get(api.getRequiredPermission()) == Boolean.TRUE)
+            {
+                return true;
+            }
+        } catch (Exception ex) {
+            return false;
+        }
+        
+        return false;
     }
-    
+
 }

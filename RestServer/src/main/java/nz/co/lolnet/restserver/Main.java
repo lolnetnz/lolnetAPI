@@ -9,12 +9,15 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 import nz.co.lolnet.restserver.rest.HelloWorldResource;
 import nz.co.lolnet.restserver.rest.lolcoins.LolCoinsResource;
-import java.util.Random;
 import nz.co.lolnet.restserver.mysql.LolnetMySQLConnection;
 
 public class Main {
 
     private static final int DEFAULT_PORT = 8085;
+
+    static String getKey() {
+        return "Bar12345Bar12345";
+    }
 
     private int serverPort;
 
@@ -30,7 +33,6 @@ public class Main {
         ResourceConfig resourceConfig = new ResourceConfig();
         new LolCoinsResource(resourceConfig);
         resourceConfig.packages(HelloWorldResource.class.getPackage().getName());
-        
 
         resourceConfig.register(JacksonFeature.class);
         ServletContainer servletContainer = new ServletContainer(resourceConfig);
