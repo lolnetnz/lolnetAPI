@@ -5,12 +5,8 @@
  */
 package nz.co.lolnet.restserver;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import nz.co.lolnet.restserver.rest.lolcoins.GetPlayerBalance;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 /**
  *

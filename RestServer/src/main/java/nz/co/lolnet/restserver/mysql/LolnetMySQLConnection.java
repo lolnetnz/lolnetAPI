@@ -18,9 +18,9 @@ import java.util.logging.Logger;
  */
 public class LolnetMySQLConnection {
 
-    private static HashMap<String,String> URL = new HashMap();
-    private static HashMap<String,String> USERNAME = new HashMap();
-    private static HashMap<String,String> PASSWORD = new HashMap();
+    private static HashMap<String,String> URL = new HashMap<String, String>();
+    private static HashMap<String,String> USERNAME = new HashMap<String, String>();
+    private static HashMap<String,String> PASSWORD = new HashMap<String, String>();
     public LolnetMySQLConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");

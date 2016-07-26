@@ -5,8 +5,6 @@
  */
 package nz.co.lolnet.restserver;
 
-import javax.ws.rs.GET;
-
 /**
  *
  * @author James
@@ -20,8 +18,5 @@ public class LolnetAPI {
 
     public String getRequiredPermission() {
         return requiredPermission;
-    }
-    
-    
-    
+    }   
 }
