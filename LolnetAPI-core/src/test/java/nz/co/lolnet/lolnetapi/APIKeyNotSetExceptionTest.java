@@ -54,11 +54,7 @@ public class APIKeyNotSetExceptionTest {
     @Test
     public void test()
     {
-        try {
-            lolCon.getForumUserID(null, "James137137");
-        } catch (Exception ex) {
-            Logger.getLogger(APIKeyNotSetExceptionTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }
     
 }

@@ -1,0 +1,17 @@
+[
+    {
+        "modid": "lolnetapi",
+        "name": "LolnetAPI",
+        "version": "0.0.1",
+        "description": "LolnetAPI Plugin",
+        "url": "https://www.lolnet.co.nz/",
+        "authorList": [
+            "james137137",
+            "lx_gaming",
+            "cptwin"
+        ],
+        "requiredMods": [
+            "spongeapi@5.0.0-SNAPSHOT"
+        ]
+    }
+]
