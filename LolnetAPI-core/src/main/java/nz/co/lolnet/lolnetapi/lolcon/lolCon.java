@@ -385,8 +385,8 @@ public class lolCon {
         return (String) json.get("playerNickname");
     }
 
-    public static String getPlayerName(String playerUUID) throws UnsupportedEncodingException, IOException, ParseException {
-        String data = URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playerUUID, "UTF-8");
+    public static String getPlayerName(UUID playerUUID) throws UnsupportedEncodingException, IOException, ParseException {
+        String data = URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playerUUID.toString(), "UTF-8");
 
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayernamefromuuid.php");
         URLConnection conn = url.openConnection();
@@ -834,7 +834,7 @@ public class lolCon {
         }
         return result;
     }
-
+    
     public static boolean playerExists(String authHash, String playerName) {
         boolean result = false;
         try {
