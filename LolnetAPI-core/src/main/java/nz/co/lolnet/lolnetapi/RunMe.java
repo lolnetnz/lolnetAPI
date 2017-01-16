@@ -20,7 +20,6 @@ public class RunMe {
         try {
             System.out.println(lolCon.playerExists(null, "james137137"));
             boolean updatetPlayerTitle = lolCon.ChangePlayerUUID("james137137", null,null);
-            System.out.println(lolCon.getPlayerName("NOTSET"));
             System.err.println(updatetPlayerTitle);
         } catch (Exception ex) {
             Logger.getLogger(RunMe.class.getName()).log(Level.SEVERE, null, ex);
