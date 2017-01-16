@@ -18,12 +18,10 @@ public class RunMe {
     public static void main(String[] args) {
         Settings.setAPIKey("");
         try {
-            boolean playerExist = lolCon.playerExists(null, "James1337");
-            boolean result = lolCon.registerNewPlayer(null, "James1337");
-            System.out.println(result);
-            System.out.println(playerExist);
-            System.out.println(lolCon.playerExists(null, "James1337"));
-            System.out.println("");
+            System.out.println(lolCon.playerExists(null, "james137137"));
+            boolean updatetPlayerTitle = lolCon.ChangePlayerUUID("james137137", "NOTSET",null);
+            System.out.println(lolCon.getPlayerName("NOTSET"));
+            System.err.println(updatetPlayerTitle);
         } catch (Exception ex) {
             Logger.getLogger(RunMe.class.getName()).log(Level.SEVERE, null, ex);
         }

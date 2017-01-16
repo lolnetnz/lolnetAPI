@@ -3,15 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nz.co.lolnet</groupId>
     <artifactId>LolnetAPI</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <packaging>pom</packaging>
     
     <modules>
-        
-	<module>LolnetAPI-bukkit</module>
-    <module>LolnetAPI-bungee</module>
-    <module>LolnetAPI-core</module>
-        <module>RestServer</module>
+        <module>LolnetAPI-bukkit</module>
+        <module>LolnetAPI-bungee</module>
+        <module>LolnetAPI-core</module>
     </modules>
     
     <properties>
