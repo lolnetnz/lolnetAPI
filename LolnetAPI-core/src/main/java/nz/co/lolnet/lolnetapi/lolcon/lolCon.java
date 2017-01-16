@@ -33,10 +33,10 @@ public class lolCon {
 
     @Deprecated
     public static boolean registerNewPlayer(String authHash, String playername) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        return registerNewPlayer(authHash, playername, "NOSET");
+        return registerNewPlayer(authHash, playername, null);
     }
 
-    public static boolean registerNewPlayer(String authHash, String playername, String playeruuid) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+    public static boolean registerNewPlayer(String authHash, String playername, UUID playeruuid) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         if (playerExists(authHash, playername)) {
             return true;
         } else {
@@ -45,7 +45,12 @@ public class lolCon {
                 // Construct data
 
                 String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
-                data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playeruuid, "UTF-8");
+                if (playeruuid != null) {
+                    data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playeruuid.toString(), "UTF-8");
+                } else
+                {
+                    data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode("NA", "UTF-8");
+                }
                 data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
                 // Send data
                 URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/registernewplayer_new.php");
@@ -72,10 +77,8 @@ public class lolCon {
             return result;
         }
     }
-    
-    
 
-    public static boolean ChangePlayerUUID(String playername, String playeruuid, String authHash)  throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+    public static boolean ChangePlayerUUID(String playername, UUID playeruuid, String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         if (!playerExists(authHash, playername)) {
             return false;
         } else {
@@ -84,10 +87,47 @@ public class lolCon {
                 // Construct data
 
                 String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
-                data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playeruuid, "UTF-8");
+                data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playeruuid.toString(), "UTF-8");
                 data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
                 // Send data
-                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/changewplayeruuid.php");
+                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/changeplayeruuid.php");
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(data);
+                wr.flush();
+
+                // Get the response
+                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String line = null;
+                while ((line = rd.readLine()) != null) {
+                    if (line.toLowerCase().contains("true")) {
+                        result = true;
+                        break;
+                    }
+                }
+                wr.close();
+                rd.close();
+            } catch (Exception e) {
+                return result;
+            }
+            return result;
+        }
+    }
+    
+    public static boolean ChangePlayerName(String playername, UUID playeruuid, String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
+        if (!playerExists(authHash, playername)) {
+            return false;
+        } else {
+            boolean result = false;
+            try {
+                // Construct data
+
+                String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+                data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playeruuid.toString(), "UTF-8");
+                data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+                // Send data
+                URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/changeplayername.php");
                 URLConnection conn = url.openConnection();
                 conn.setDoOutput(true);
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
@@ -344,7 +384,7 @@ public class lolCon {
 
         return (String) json.get("playerNickname");
     }
-    
+
     public static String getPlayerName(String playerUUID) throws UnsupportedEncodingException, IOException, ParseException {
         String data = URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playerUUID, "UTF-8");
 
@@ -363,6 +403,26 @@ public class lolCon {
         rd.close();
 
         return (String) json.get("playername");
+    }
+    
+    public static String getPlayerUUID(String playername) throws UnsupportedEncodingException, IOException, ParseException {
+        String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayeruuidfromname.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return (String) json.get("playeruuid");
     }
 
     public static String getPlayerNameFromFourmID(int userForumID) throws UnsupportedEncodingException, IOException, ParseException {
@@ -806,7 +866,7 @@ public class lolCon {
         }
         return result;
     }
-    
+
     public static boolean playerExists(String authHash, UUID playerUUID) {
         boolean result = false;
         try {

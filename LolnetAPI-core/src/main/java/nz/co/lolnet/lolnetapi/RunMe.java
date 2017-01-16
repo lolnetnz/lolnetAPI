@@ -19,7 +19,7 @@ public class RunMe {
         Settings.setAPIKey("");
         try {
             System.out.println(lolCon.playerExists(null, "james137137"));
-            boolean updatetPlayerTitle = lolCon.ChangePlayerUUID("james137137", "NOTSET",null);
+            boolean updatetPlayerTitle = lolCon.ChangePlayerUUID("james137137", null,null);
             System.out.println(lolCon.getPlayerName("NOTSET"));
             System.err.println(updatetPlayerTitle);
         } catch (Exception ex) {
