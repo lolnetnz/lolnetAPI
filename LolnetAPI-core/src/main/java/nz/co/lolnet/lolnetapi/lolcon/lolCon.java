@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nz.co.lolnet.lolnetapi.APIKeyNotSetException;
@@ -783,6 +784,38 @@ public class lolCon {
             data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
             // Send data
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/playerexistsinlolcoindatabase.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = null;
+            while ((line = rd.readLine()) != null) {
+                if (line.toLowerCase().contains("true")) {
+                    result = true;
+                    break;
+                }
+            }
+            wr.close();
+            rd.close();
+        } catch (Exception e) {
+        }
+        return result;
+    }
+    
+    public static boolean playerExists(String authHash, UUID playerUUID) {
+        boolean result = false;
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playerUUID.toString(), "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/playerexistsinlolcoindatabaseuuid.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
             conn.setConnectTimeout(Settings.httpTimeOut);
