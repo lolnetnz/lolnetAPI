@@ -116,7 +116,7 @@ public class lolCon {
     }
     
     public static boolean ChangePlayerName(String playername, UUID playeruuid, String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
-        if (!playerExists(authHash, playername)) {
+        if (!playerExists(authHash, playeruuid)) {
             return false;
         } else {
             boolean result = false;

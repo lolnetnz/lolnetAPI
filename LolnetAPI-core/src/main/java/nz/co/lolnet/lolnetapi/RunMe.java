@@ -5,6 +5,7 @@
  */
 package nz.co.lolnet.lolnetapi;
 
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import nz.co.lolnet.lolnetapi.lolcon.lolCon;
@@ -19,8 +20,9 @@ public class RunMe {
         Settings.setAPIKey("");
         try {
             System.out.println(lolCon.playerExists(null, "james137137"));
-            boolean updatetPlayerTitle = lolCon.ChangePlayerUUID("james137137", null,null);
-            System.err.println(updatetPlayerTitle);
+            UUID uuid = UUID.fromString("96513543-3da9-4ec4-8b29-31b542921da1");
+            System.out.println(lolCon.playerExists(null, uuid));
+            lolCon.ChangePlayerName("James137137", uuid, null);
         } catch (Exception ex) {
             Logger.getLogger(RunMe.class.getName()).log(Level.SEVERE, null, ex);
         }
