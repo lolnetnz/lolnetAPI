@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,8 +48,7 @@ public class lolCon {
                 String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
                 if (playeruuid != null) {
                     data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode(playeruuid.toString(), "UTF-8");
-                } else
-                {
+                } else {
                     data += "&" + URLEncoder.encode("playeruuid", "UTF-8") + "=" + URLEncoder.encode("NA", "UTF-8");
                 }
                 data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
@@ -114,7 +114,7 @@ public class lolCon {
             return result;
         }
     }
-    
+
     public static boolean ChangePlayerName(String playername, UUID playeruuid, String authHash) throws UnsupportedEncodingException, MalformedURLException, IOException, ParseException {
         if (!playerExists(authHash, playeruuid)) {
             return false;
@@ -404,7 +404,7 @@ public class lolCon {
 
         return (String) json.get("playername");
     }
-    
+
     public static String getPlayerUUID(String playername) throws UnsupportedEncodingException, IOException, ParseException {
         String data = URLEncoder.encode("playername", "UTF-8") + "=" + URLEncoder.encode(playername, "UTF-8");
 
@@ -834,7 +834,7 @@ public class lolCon {
         }
         return result;
     }
-    
+
     public static boolean playerExists(String authHash, String playerName) {
         boolean result = false;
         try {
@@ -1249,5 +1249,118 @@ public class lolCon {
         rd.close();
 
         return Integer.parseInt(json.get("forumid").toString());
+    }
+
+    public static String getDiscordUserIDFromForumID(String authHash, String userForumID) throws UnsupportedEncodingException, IOException, ParseException {
+        String output = "";
+        try {
+            authHash = Settings.checkAPIKey(authHash);
+        } catch (APIKeyNotSetException ex) {
+            Logger.getLogger(lolCon.class.getName()).log(Level.SEVERE, null, ex);
+            return output;
+        }
+
+        String data = URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(authHash, "UTF-8");
+        data += "&" + URLEncoder.encode("forumid", "UTF-8") + "=" + URLEncoder.encode(userForumID + "", "UTF-8");
+
+        // Send data
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getdiscordidfromforumuserid.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String outputS = rd.readLine();
+        JSONObject json = (JSONObject) new JSONParser().parse(outputS);
+
+        wr.close();
+        rd.close();
+
+        return json.get("discordid").toString();
+    }
+
+    public static HashMap<Integer, Integer> getUpgrades(int playerFourmID, String authHash) {
+        HashMap<Integer, Integer> upgrades = new HashMap<>();
+        try {
+            // Construct data
+
+            String data = URLEncoder.encode("playerID", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(playerFourmID), "UTF-8");
+            data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+            // Send data
+            URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerpackages.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.httpTimeOut);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+
+            // Get the response
+            BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String input = rd.readLine();
+            JSONArray json = (JSONArray) new JSONParser().parse(input);
+            wr.close();
+            rd.close();
+
+            for (Object o : json) {
+                String toString = o.toString();
+                if (toString.length() != 0) {
+                    String[] split = toString.split("~");
+                    for (String string : split) {
+                        upgrades.put(Integer.parseInt(string.split(";")[0]), Integer.parseInt(string.split(";")[1]));
+                    }
+                }
+            }
+            return upgrades;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getUserUpgradeInfo(int user_upgrade_id, String authHash) throws UnsupportedEncodingException, IOException, ParseException, APIKeyNotSetException {
+        String data = URLEncoder.encode("user_upgrade_id", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(user_upgrade_id), "UTF-8");
+        data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getuserupgradeinfo.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+
+        wr.close();
+        rd.close();
+
+        return (String) json.get("info");
+    }
+
+    public static boolean removeUserUpgrade(int user_upgrade_record_id, String authHash) throws UnsupportedEncodingException, IOException, ParseException, APIKeyNotSetException {
+        boolean success = false;
+        String data = URLEncoder.encode("user_upgrade_record_id", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(user_upgrade_record_id), "UTF-8");
+        data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removeuserupgradeinfo.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        success = (boolean) json.get("successful");
+        wr.close();
+        rd.close();
+
+        return success;
     }
 }

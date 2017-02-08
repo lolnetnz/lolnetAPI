@@ -5,6 +5,7 @@
  */
 package nz.co.lolnet.lolnetapi;
 
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,10 +20,15 @@ public class RunMe {
     public static void main(String[] args) {
         Settings.setAPIKey("");
         try {
-            System.out.println(lolCon.playerExists(null, "james137137"));
-            UUID uuid = UUID.fromString("96513543-3da9-4ec4-8b29-31b542921da1");
-            System.out.println(lolCon.playerExists(null, uuid));
-            lolCon.ChangePlayerName("James137137", uuid, null);
+            System.out.println(Integer.parseInt("12,000".replaceAll(",", "")));
+            HashMap<Integer, Integer> upgrades = lolCon.getUpgrades(214, null);
+            System.out.println(upgrades);
+            /*System.out.println("removing all");
+            for (int id : upgrades.keySet()) {
+            System.out.println(lolCon.removeUserUpgrade(id, null));
+            }
+            System.out.println(lolCon.getUpgrades(214, null));
+            System.out.println(lolCon.getUserUpgradeInfo(18, null));*/
         } catch (Exception ex) {
             Logger.getLogger(RunMe.class.getName()).log(Level.SEVERE, null, ex);
         }
