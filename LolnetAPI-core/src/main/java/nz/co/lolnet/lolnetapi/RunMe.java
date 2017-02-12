@@ -20,9 +20,11 @@ public class RunMe {
     public static void main(String[] args) {
         Settings.setAPIKey("");
         try {
-            System.out.println(Integer.parseInt("12,000".replaceAll(",", "")));
-            HashMap<Integer, Integer> upgrades = lolCon.getUpgrades(214, null);
-            System.out.println(upgrades);
+            int forumID = 0;
+            String playerName = "James137137";
+            forumID = lolCon.getForumUserID(null, playerName);
+            System.out.println(forumID);
+            System.out.println(lolCon.setForumMinecraftLinkGroup(forumID, null));
             /*System.out.println("removing all");
             for (int id : upgrades.keySet()) {
             System.out.println(lolCon.removeUserUpgrade(id, null));

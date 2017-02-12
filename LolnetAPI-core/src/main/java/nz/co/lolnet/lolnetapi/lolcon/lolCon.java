@@ -1363,4 +1363,26 @@ public class lolCon {
 
         return success;
     }
+    
+    public static boolean setForumMinecraftLinkGroup(int forumID, String authHash) throws UnsupportedEncodingException, IOException, ParseException, APIKeyNotSetException {
+        boolean success = false;
+        String data = URLEncoder.encode("userforumid", "UTF-8") + "=" + URLEncoder.encode(Integer.toString(forumID), "UTF-8");
+        data += "&" + URLEncoder.encode("authhash", "UTF-8") + "=" + URLEncoder.encode(Settings.checkAPIKey(authHash), "UTF-8");
+
+        URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/setplayerforumminecraftlink.php");
+        URLConnection conn = url.openConnection();
+        conn.setDoOutput(true);
+        conn.setConnectTimeout(Settings.httpTimeOut);
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
+        success = (boolean) json.get("successful");
+        wr.close();
+        rd.close();
+
+        return success;
+    }
 }
