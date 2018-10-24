@@ -56,7 +56,8 @@ public class lolCon {
                 URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/registernewplayer_new.php");
                 URLConnection conn = url.openConnection();
                 conn.setDoOutput(true);
-                conn.setConnectTimeout(Settings.httpTimeOut);
+                conn.setConnectTimeout(Settings.connectTimeout);
+                conn.setReadTimeout(Settings.readTimeout);
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                 wr.write(data);
                 wr.flush();
@@ -93,6 +94,8 @@ public class lolCon {
                 URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/changeplayeruuid.php");
                 URLConnection conn = url.openConnection();
                 conn.setDoOutput(true);
+                conn.setConnectTimeout(Settings.connectTimeout);
+                conn.setReadTimeout(Settings.readTimeout);
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                 wr.write(data);
                 wr.flush();
@@ -130,6 +133,8 @@ public class lolCon {
                 URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/changeplayername.php");
                 URLConnection conn = url.openConnection();
                 conn.setDoOutput(true);
+                conn.setConnectTimeout(Settings.connectTimeout);
+                conn.setReadTimeout(Settings.readTimeout);
                 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
                 wr.write(data);
                 wr.flush();
@@ -158,7 +163,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerbalance.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -178,7 +184,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayervotevaluemultiplier.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(1000);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -198,7 +205,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayervotevaluemultiplier2.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(1000);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -231,6 +239,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/setplayervotevaluemultiplier.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -271,6 +281,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/setplayervotevaluemultiplier2.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -298,7 +310,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerbonusclaimblocks.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -318,7 +331,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayertitle.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -344,6 +358,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayertitle.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -371,7 +387,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayernick.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -391,7 +408,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayernamefromuuid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -411,7 +429,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayeruuidfromname.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -431,7 +450,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerfromforumid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -451,7 +471,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerfromnick.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -477,6 +498,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayernick.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -505,7 +528,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettop10monthlyvotes.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
 
         // Get the response
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
@@ -541,7 +565,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -579,7 +604,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumgroups.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -619,7 +645,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuserid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -657,7 +684,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuserforumgroups.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -692,7 +720,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/addusertoforumgroup.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -724,7 +753,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removeuserfromforumgroup.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -758,7 +788,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettimelastvoted.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -813,7 +844,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbonusclaimblocks.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -846,7 +878,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/playerexistsinlolcoindatabase.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -878,7 +911,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/playerexistsinlolcoindatabaseuuid.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -912,6 +946,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -946,7 +982,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/updateplayerbalance.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -989,7 +1026,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/logsigntransaction.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1021,7 +1059,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removesign.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1056,7 +1095,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/createsign.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1088,7 +1128,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getlinefromsign.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1126,7 +1167,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/gettempcommand.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1163,7 +1205,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/addtempcommand.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1198,7 +1241,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removetempcommand.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1236,7 +1280,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getforumuseridfromdiscordid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -1267,7 +1312,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getdiscordidfromforumuserid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -1293,7 +1339,8 @@ public class lolCon {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getplayerpackages.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -1328,7 +1375,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/getuserupgradeinfo.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -1350,7 +1398,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/removeuserupgradeinfo.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -1372,7 +1421,8 @@ public class lolCon {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolcoins/setplayerforumminecraftlink.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();

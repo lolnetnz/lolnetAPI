@@ -32,7 +32,8 @@ public class GeneralAPI {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/ismojangonline.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         // Get the response
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         JSONObject json = (JSONObject) new JSONParser().parse(rd.readLine());
@@ -61,7 +62,8 @@ public class GeneralAPI {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/getplayeruuid.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -88,7 +90,8 @@ public class GeneralAPI {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/getmyip.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
         String output = rd.readLine();
         rd.close();
@@ -113,7 +116,8 @@ public class GeneralAPI {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolauth/getPlayerForumIDFromUUID.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -145,7 +149,8 @@ public class GeneralAPI {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/general/getPlayerForumIDFromUsername.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();

@@ -35,7 +35,8 @@ public class lolChat {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolchat/recordmessage.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
