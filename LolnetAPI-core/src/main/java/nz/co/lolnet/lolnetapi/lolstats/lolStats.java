@@ -38,7 +38,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayerip.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -60,7 +61,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayerfood.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -74,7 +76,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/getplayerelo.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -103,7 +106,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logblockbreak.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -125,7 +129,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logentityvsplayerdeath.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -147,7 +152,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayervsentitydeath.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -169,7 +175,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayervsplayerdeath.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -183,7 +190,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/isplayerregisteredelo.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -212,7 +220,8 @@ public class lolStats {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/updateplayerelo.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -234,7 +243,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/logplayernumbers.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -257,7 +267,8 @@ public class lolStats {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/registerplayerelo.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -272,7 +283,8 @@ public class lolStats {
         URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/isplayerregisteredtime.php");
         URLConnection conn = url.openConnection();
         conn.setDoOutput(true);
-        conn.setConnectTimeout(Settings.httpTimeOut);
+        conn.setConnectTimeout(Settings.connectTimeout);
+        conn.setReadTimeout(Settings.readTimeout);
         OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
         wr.write(data);
         wr.flush();
@@ -300,7 +312,8 @@ public class lolStats {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/registerplayertime.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
@@ -324,7 +337,8 @@ public class lolStats {
             URL url = new URL("https://www.lolnet.co.nz/api/v1.0/lolstats/updateplayertime.php");
             URLConnection conn = url.openConnection();
             conn.setDoOutput(true);
-            conn.setConnectTimeout(Settings.httpTimeOut);
+            conn.setConnectTimeout(Settings.connectTimeout);
+            conn.setReadTimeout(Settings.readTimeout);
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(data);
             wr.flush();
